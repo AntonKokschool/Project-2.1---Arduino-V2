@@ -10,9 +10,14 @@
 
 int main(void)
 {
-    /* Replace with your application code */
+    volatile count = 0;
+	
     while (1) 
     {
+		if (count < 32767)
+		{count++;}
+		else
+		{count = 0;}
     }
 }
 
