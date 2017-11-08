@@ -41,6 +41,7 @@ void ser_writeln(char *line)
 		char c = line[p];
 		ser_write(c);
 	}
+	ser_write(0x0A);
 }
 
 // Serial read function in C
