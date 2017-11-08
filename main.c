@@ -18,7 +18,14 @@ char buffer[200];
 	{
 		
 		ser_readln(buffer, 200);
-		ser_writeln(buffer);
+		if (!strcmp(buffer, "Arduino"))
+			{
+				ser_writeln("Handshake")
+			}
+		if (strcmp(buffer, 200))
+			{
+				ser_writeln("ERROR")
+			}
 		
 	}
 }
