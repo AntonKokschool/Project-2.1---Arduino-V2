@@ -13,11 +13,9 @@ int main(void)
 {
 	ser_init();
 	_delay_ms(1000);
-char buffer[200];
+//char buffer[200];
 	while(1)
 	{
-		ser_readln(buffer, 200);
-		ser_writeln(buffer);
-		
+		ser_writeln("Default");
 	}
 }
