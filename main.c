@@ -13,11 +13,12 @@ int main(void)
 {
 	ser_init();
 	_delay_ms(1000);
-
-	while(1) {
+char buffer[200];
+	while(1)
+	{
 		
-		ser_writeln("Arduino\n");
-		_delay_ms(1000);
+		ser_readln(buffer, 200);
+		ser_writeln(buffer);
 		
 	}
 }
