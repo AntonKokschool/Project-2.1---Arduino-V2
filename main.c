@@ -16,16 +16,8 @@ int main(void)
 char buffer[200];
 	while(1)
 	{
-		
 		ser_readln(buffer, 200);
-		if (!strcmp(buffer, "Arduino"))
-			{
-				ser_writeln("Handshake")
-			}
-		if (strcmp(buffer, 200))
-			{
-				ser_writeln("ERROR")
-			}
+		ser_writeln(buffer);
 		
 	}
 }

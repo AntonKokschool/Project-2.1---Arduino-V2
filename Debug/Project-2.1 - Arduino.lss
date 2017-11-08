@@ -110,7 +110,6 @@ int main(void)
 char buffer[200];
 	while(1)
 	{
-		
 		ser_readln(buffer, 200);
   ac:	68 ec       	ldi	r22, 0xC8	; 200
   ae:	70 e0       	ldi	r23, 0x00	; 0
