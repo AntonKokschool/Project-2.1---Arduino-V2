@@ -41,6 +41,7 @@ void ser_writeln(char *line)
 		char c = line[p];
 		ser_write(c);
 	}
+	ser_write(0x0A);
 }
 
 // Serial read function in C
@@ -52,15 +53,14 @@ char ser_read() {
 
 // Serial read line function in C (from computer to Arduino)
 
-char ser_readln()
-{
+void ser_readln(char *line, uint8_t bufsize) {
 	uint8_t p=0;
-	char word;
-	char part;
-	
-	while (part!='\n')
-	{
-		part=ser_read();
-		word += part;
-	}
+	char c;
+	do {
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+		}
+		line[p]='\0';
+	} while ((c!='\n') && (p<bufsize-1));
 }
