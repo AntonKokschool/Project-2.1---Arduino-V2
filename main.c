@@ -13,16 +13,9 @@ int main(void)
 {
 	ser_init();
 	_delay_ms(1000);
-	
-	DDRB=0; // read (pin 0+1)
-	DDRD=4+8; // write (pin 2+3)
-	PORTD|=4; // LED 1 is on by default
-	
-//	char word = ser_readln();
-	while(1) {
-		
-		ser_writeln("Arduino\n");
-		_delay_ms(1000);
-		
+//char buffer[200];
+	while(1)
+	{
+		ser_writeln("Default");
 	}
 }
