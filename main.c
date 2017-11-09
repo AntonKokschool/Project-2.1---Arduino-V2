@@ -12,6 +12,7 @@
 int main(void)
 {
 	ser_init();
+	setupLed();
 	_delay_ms(1000);
 //char buffer[200];
 	while(1)
