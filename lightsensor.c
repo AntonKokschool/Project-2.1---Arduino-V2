@@ -38,39 +38,27 @@ int lightsensor(void)
 {
 	ser_init();
 	int ADCvalue;
-	DDRB = 1;
-	while (1)
-	{		
-		ADCvalue = ADCsingleREAD(1);
-		// ADCvalue now contains an 10bit ADC read
-		if (ADCvalue < 100) {
-			ser_writeln("Dark");
+			
+	ADCvalue = ADCsingleREAD(1);
+	// ADCvalue now contains an 10bit ADC read
+	if (ADCvalue < 100) {
+		ser_writeln("Dark");
+	} else {
+		if (ADCvalue < 400) {
+			ser_writeln("Dim");
 		} else {
-			if (ADCvalue < 400) {
-				ser_writeln("Dim");
+			if (ADCvalue < 420) {
+				ser_writeln("Light");
 			} else {
-				if (ADCvalue < 420) {
-					ser_writeln("Light");
+				if (ADCvalue < 430) {
+					ser_writeln("Bright");
 				} else {
-					if (ADCvalue < 430) {
-						ser_writeln("Bright");
-						PORTB = 1;
-					} else {
-						if (ADCvalue >= 440) {
-							ser_writeln("Too Bright");
-							PORTB = 1;
-						}
+					if (ADCvalue >= 440) {
+						ser_writeln("Too Bright");
 					}
 				}
 			}
+			
 		}
-	/*if (ADCvalue != 0) {
-		PORTB = 1;
-	} else {
-		PORTB = 0;
-		} */
-		//ser_writeln(ADCvalue);
-		_delay_ms(1000);
-		PORTB = 0;
 	}
 }
