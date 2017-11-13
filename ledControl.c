@@ -15,6 +15,7 @@ void yellowLedOn(){
 }
 void yellowLedOff(){
 	TIMSK1 &= (1 << ~OCIE1A);	// disable timer compare interrupt used for yellow led
+	PORTD &= ~0x40;				// Turns off yellow led
 }
 void redLedOn(){
 	PORTD |= 0x80;				// Turns on red led

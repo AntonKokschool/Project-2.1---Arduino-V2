@@ -3,29 +3,29 @@ Project-2.1 - Arduino.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000008  00800100  0000018c  00000200  2**0
+  0 .data         00000096  00800100  000003ea  0000045e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000018c  00000000  00000000  00000074  2**1
+  1 .text         000003ea  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000208  2**0
+  2 .comment      00000030  00000000  00000000  000004f4  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000238  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000524  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000b8  00000000  00000000  00000278  2**0
+  4 .debug_aranges 000000e0  00000000  00000000  00000564  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000a98  00000000  00000000  00000330  2**0
+  5 .debug_info   00001224  00000000  00000000  00000644  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000089b  00000000  00000000  00000dc8  2**0
+  6 .debug_abbrev 000009de  00000000  00000000  00001868  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000582  00000000  00000000  00001663  2**0
+  7 .debug_line   000006bf  00000000  00000000  00002246  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000160  00000000  00000000  00001be8  2**2
+  8 .debug_frame  000001a8  00000000  00000000  00002908  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000472  00000000  00000000  00001d48  2**0
+  9 .debug_str    000004bc  00000000  00000000  00002ab0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000231  00000000  00000000  000021ba  2**0
+ 10 .debug_loc    0000041e  00000000  00000000  00002f6c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000088  00000000  00000000  000023eb  2**0
+ 11 .debug_ranges 00000138  00000000  00000000  0000338a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -42,7 +42,7 @@ Disassembly of section .text:
   20:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   24:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   28:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
-  2c:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <__vector_11>
+  2c:	0c 94 7b 00 	jmp	0xf6	; 0xf6 <__vector_11>
   30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   38:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
@@ -70,227 +70,687 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	ec e8       	ldi	r30, 0x8C	; 140
-  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7a:	ea ee       	ldi	r30, 0xEA	; 234
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	a8 30       	cpi	r26, 0x08	; 8
+  84:	a6 39       	cpi	r26, 0x96	; 150
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
-  8a:	0e 94 7e 00 	call	0xfc	; 0xfc <main>
-  8e:	0c 94 c4 00 	jmp	0x188	; 0x188 <_exit>
+  8a:	0e 94 8d 00 	call	0x11a	; 0x11a <main>
+  8e:	0c 94 f3 01 	jmp	0x3e6	; 0x3e6 <_exit>
 
 00000092 <__bad_interrupt>:
   92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000096 <yellowLedOff>:
+00000096 <greenLedOn>:
+ 1: Timer1 compare match interrupt example 
+ more infos: http://www.letmakerobots.com/node/28278
+ created by RobotFreak 
+ */
+void greenLedOn(){
+	PORTD |= 0x20;				// Turns on green led
+  96:	5d 9a       	sbi	0x0b, 5	; 11
+  98:	08 95       	ret
+
+0000009a <greenLedOff>:
+}
+void greenLedOff(){
+	PORTD &= ~0x20;				// Turns off green led
+  9a:	5d 98       	cbi	0x0b, 5	; 11
+  9c:	08 95       	ret
+
+0000009e <yellowLedOn>:
+}
+void yellowLedOn(){
+	TIMSK1 |= (1 << OCIE1A);	// enable timer compare interrupt used for yellow led
+  9e:	ef e6       	ldi	r30, 0x6F	; 111
+  a0:	f0 e0       	ldi	r31, 0x00	; 0
+  a2:	80 81       	ld	r24, Z
+  a4:	82 60       	ori	r24, 0x02	; 2
+  a6:	80 83       	st	Z, r24
+  a8:	08 95       	ret
+
+000000aa <yellowLedOff>:
+}
+void yellowLedOff(){
+	TIMSK1 &= (1 << ~OCIE1A);	// disable timer compare interrupt used for yellow led
+  aa:	ef e6       	ldi	r30, 0x6F	; 111
+  ac:	f0 e0       	ldi	r31, 0x00	; 0
+  ae:	80 81       	ld	r24, Z
+  b0:	10 82       	st	Z, r1
+	PORTD &= ~0x40;				// Turns off yellow led
+  b2:	5e 98       	cbi	0x0b, 6	; 11
+  b4:	08 95       	ret
+
+000000b6 <redLedOn>:
 }
 void redLedOn(){
 	PORTD |= 0x80;				// Turns on red led
+  b6:	5f 9a       	sbi	0x0b, 7	; 11
+  b8:	08 95       	ret
+
+000000ba <redLedOff>:
 }
 void redLedOff(){
 	PORTD &= ~0x80;				// Turns off red led
-  96:	ef e6       	ldi	r30, 0x6F	; 111
-  98:	f0 e0       	ldi	r31, 0x00	; 0
-  9a:	80 81       	ld	r24, Z
-  9c:	10 82       	st	Z, r1
-  9e:	08 95       	ret
+  ba:	5f 98       	cbi	0x0b, 7	; 11
+  bc:	08 95       	ret
 
-000000a0 <setupLed>:
+000000be <setupLed>:
 }
 void setupLed()
 {
 	DDRD = 0x20 | 0x40 | 0x80;
-  a0:	80 ee       	ldi	r24, 0xE0	; 224
-  a2:	8a b9       	out	0x0a, r24	; 10
+  be:	80 ee       	ldi	r24, 0xE0	; 224
+  c0:	8a b9       	out	0x0a, r24	; 10
 	// initialize timer1 
 	cli();						// disable all interrupts
-  a4:	f8 94       	cli
+  c2:	f8 94       	cli
 	TCCR1A = 0;
-  a6:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
+  c4:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
 	TCCR1B = 0;
-  aa:	e1 e8       	ldi	r30, 0x81	; 129
-  ac:	f0 e0       	ldi	r31, 0x00	; 0
-  ae:	10 82       	st	Z, r1
+  c8:	e1 e8       	ldi	r30, 0x81	; 129
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+  cc:	10 82       	st	Z, r1
 	TCNT1  = 0;
-  b0:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
-  b4:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+  ce:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+  d2:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
 	
 	OCR1A = 31250;				// compare match register 16MHz/256/2Hz=
-  b8:	82 e1       	ldi	r24, 0x12	; 18
-  ba:	9a e7       	ldi	r25, 0x7A	; 122
-  bc:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
-  c0:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+  d6:	82 e1       	ldi	r24, 0x12	; 18
+  d8:	9a e7       	ldi	r25, 0x7A	; 122
+  da:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+  de:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
 	TCCR1B |= (1 << WGM12);		// CTC mode
-  c4:	80 81       	ld	r24, Z
-  c6:	88 60       	ori	r24, 0x08	; 8
-  c8:	80 83       	st	Z, r24
+  e2:	80 81       	ld	r24, Z
+  e4:	88 60       	ori	r24, 0x08	; 8
+  e6:	80 83       	st	Z, r24
 	TCCR1B |= (1 << CS12);		// 256 prescaler
-  ca:	80 81       	ld	r24, Z
-  cc:	84 60       	ori	r24, 0x04	; 4
-  ce:	80 83       	st	Z, r24
+  e8:	80 81       	ld	r24, Z
+  ea:	84 60       	ori	r24, 0x04	; 4
+  ec:	80 83       	st	Z, r24
 	yellowLedOff();				
-  d0:	0e 94 4b 00 	call	0x96	; 0x96 <yellowLedOff>
+  ee:	0e 94 55 00 	call	0xaa	; 0xaa <yellowLedOff>
 	sei();           // enable all interrupts
-  d4:	78 94       	sei
-  d6:	08 95       	ret
+  f2:	78 94       	sei
+  f4:	08 95       	ret
 
-000000d8 <__vector_11>:
+000000f6 <__vector_11>:
 }
 
 
 ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
 {
-  d8:	1f 92       	push	r1
-  da:	0f 92       	push	r0
-  dc:	0f b6       	in	r0, 0x3f	; 63
-  de:	0f 92       	push	r0
-  e0:	11 24       	eor	r1, r1
-  e2:	8f 93       	push	r24
-  e4:	9f 93       	push	r25
+  f6:	1f 92       	push	r1
+  f8:	0f 92       	push	r0
+  fa:	0f b6       	in	r0, 0x3f	; 63
+  fc:	0f 92       	push	r0
+  fe:	11 24       	eor	r1, r1
+ 100:	8f 93       	push	r24
+ 102:	9f 93       	push	r25
 	PORTD ^= 0x40;				// invert yellow led to on/off state
-  e6:	9b b1       	in	r25, 0x0b	; 11
-  e8:	80 e4       	ldi	r24, 0x40	; 64
-  ea:	89 27       	eor	r24, r25
-  ec:	8b b9       	out	0x0b, r24	; 11
-  ee:	9f 91       	pop	r25
-  f0:	8f 91       	pop	r24
-  f2:	0f 90       	pop	r0
-  f4:	0f be       	out	0x3f, r0	; 63
-  f6:	0f 90       	pop	r0
-  f8:	1f 90       	pop	r1
-  fa:	18 95       	reti
+ 104:	9b b1       	in	r25, 0x0b	; 11
+ 106:	80 e4       	ldi	r24, 0x40	; 64
+ 108:	89 27       	eor	r24, r25
+ 10a:	8b b9       	out	0x0b, r24	; 11
+ 10c:	9f 91       	pop	r25
+ 10e:	8f 91       	pop	r24
+ 110:	0f 90       	pop	r0
+ 112:	0f be       	out	0x3f, r0	; 63
+ 114:	0f 90       	pop	r0
+ 116:	1f 90       	pop	r1
+ 118:	18 95       	reti
 
-000000fc <main>:
-#define F_CPU 16E6			// CPU frequency
+0000011a <main>:
 #include <util/delay.h>
+
+volatile status = "up";
 
 int main(void)
 {
+ 11a:	cf 93       	push	r28
+ 11c:	df 93       	push	r29
+ 11e:	cd b7       	in	r28, 0x3d	; 61
+ 120:	de b7       	in	r29, 0x3e	; 62
+ 122:	c8 5c       	subi	r28, 0xC8	; 200
+ 124:	d1 09       	sbc	r29, r1
+ 126:	0f b6       	in	r0, 0x3f	; 63
+ 128:	f8 94       	cli
+ 12a:	de bf       	out	0x3e, r29	; 62
+ 12c:	0f be       	out	0x3f, r0	; 63
+ 12e:	cd bf       	out	0x3d, r28	; 61
 	ser_init();
-  fc:	0e 94 90 00 	call	0x120	; 0x120 <ser_init>
-	setupLed();
- 100:	0e 94 50 00 	call	0xa0	; 0xa0 <setupLed>
+ 130:	0e 94 82 01 	call	0x304	; 0x304 <ser_init>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 104:	2f ef       	ldi	r18, 0xFF	; 255
- 106:	83 ed       	ldi	r24, 0xD3	; 211
- 108:	90 e3       	ldi	r25, 0x30	; 48
- 10a:	21 50       	subi	r18, 0x01	; 1
- 10c:	80 40       	sbci	r24, 0x00	; 0
- 10e:	90 40       	sbci	r25, 0x00	; 0
- 110:	e1 f7       	brne	.-8      	; 0x10a <main+0xe>
- 112:	00 c0       	rjmp	.+0      	; 0x114 <main+0x18>
- 114:	00 00       	nop
+ 134:	2f ef       	ldi	r18, 0xFF	; 255
+ 136:	83 ed       	ldi	r24, 0xD3	; 211
+ 138:	90 e3       	ldi	r25, 0x30	; 48
+ 13a:	21 50       	subi	r18, 0x01	; 1
+ 13c:	80 40       	sbci	r24, 0x00	; 0
+ 13e:	90 40       	sbci	r25, 0x00	; 0
+ 140:	e1 f7       	brne	.-8      	; 0x13a <main+0x20>
+ 142:	00 c0       	rjmp	.+0      	; 0x144 <main+0x2a>
+ 144:	00 00       	nop
 	_delay_ms(1000);
-//char buffer[200];
+	
+	setupLed(); // Setup for led config
+ 146:	0e 94 5f 00 	call	0xbe	; 0xbe <setupLed>
+	// Tunrs right led on based on status
+	// Down is red and up is green
+	if (status == "up")
+ 14a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 14e:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 152:	88 54       	subi	r24, 0x48	; 72
+ 154:	91 40       	sbci	r25, 0x01	; 1
+ 156:	11 f4       	brne	.+4      	; 0x15c <main+0x42>
+	{greenLedOn();}
+ 158:	0e 94 4b 00 	call	0x96	; 0x96 <greenLedOn>
+	
+	if (status == "down")
+ 15c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 160:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 164:	89 55       	subi	r24, 0x59	; 89
+ 166:	91 40       	sbci	r25, 0x01	; 1
+ 168:	11 f4       	brne	.+4      	; 0x16e <main+0x54>
+	{redLedOn();}
+ 16a:	0e 94 5b 00 	call	0xb6	; 0xb6 <redLedOn>
+	
+	char buffer[200];
 	while(1)
 	{
-		ser_writeln("Default");
- 116:	80 e0       	ldi	r24, 0x00	; 0
- 118:	91 e0       	ldi	r25, 0x01	; 1
- 11a:	0e 94 a6 00 	call	0x14c	; 0x14c <ser_writeln>
- 11e:	fb cf       	rjmp	.-10     	; 0x116 <main+0x1a>
+		ser_readln(buffer, 200);
+		uint8_t ok=0;
+ 16e:	b1 2c       	mov	r11, r1
+		
+		if (!strcmp(buffer, "Are you Arduino?"))
+		{ser_writeln("I am Arduino!"); ok=1;}
+ 170:	01 e0       	ldi	r16, 0x01	; 1
+			{
+				ser_writeln("Rolling up");
+				ser_writeln("OK");
+				rolUp();
+				ser_writeln("Rolled up"); ok=1;
+				status = "up";
+ 172:	0f 2e       	mov	r0, r31
+ 174:	f8 e4       	ldi	r31, 0x48	; 72
+ 176:	cf 2e       	mov	r12, r31
+ 178:	f1 e0       	ldi	r31, 0x01	; 1
+ 17a:	df 2e       	mov	r13, r31
+ 17c:	f0 2d       	mov	r31, r0
+			{
+				ser_writeln("Rolling down");
+				ser_writeln("OK");
+				rolDown();
+				ser_writeln("Rolled down"); ok=1;
+				status = "down";
+ 17e:	0f 2e       	mov	r0, r31
+ 180:	f9 e5       	ldi	r31, 0x59	; 89
+ 182:	ef 2e       	mov	r14, r31
+ 184:	f1 e0       	ldi	r31, 0x01	; 1
+ 186:	ff 2e       	mov	r15, r31
+ 188:	f0 2d       	mov	r31, r0
+	{redLedOn();}
+	
+	char buffer[200];
+	while(1)
+	{
+		ser_readln(buffer, 200);
+ 18a:	68 ec       	ldi	r22, 0xC8	; 200
+ 18c:	70 e0       	ldi	r23, 0x00	; 0
+ 18e:	ce 01       	movw	r24, r28
+ 190:	01 96       	adiw	r24, 0x01	; 1
+ 192:	0e 94 be 01 	call	0x37c	; 0x37c <ser_readln>
+		uint8_t ok=0;
+		
+		if (!strcmp(buffer, "Are you Arduino?"))
+ 196:	62 e0       	ldi	r22, 0x02	; 2
+ 198:	71 e0       	ldi	r23, 0x01	; 1
+ 19a:	ce 01       	movw	r24, r28
+ 19c:	01 96       	adiw	r24, 0x01	; 1
+ 19e:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <strcmp>
+ 1a2:	89 2b       	or	r24, r25
+ 1a4:	31 f4       	brne	.+12     	; 0x1b2 <main+0x98>
+		{ser_writeln("I am Arduino!"); ok=1;}
+ 1a6:	83 e1       	ldi	r24, 0x13	; 19
+ 1a8:	91 e0       	ldi	r25, 0x01	; 1
+ 1aa:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 1ae:	10 2f       	mov	r17, r16
+ 1b0:	01 c0       	rjmp	.+2      	; 0x1b4 <main+0x9a>
+	
+	char buffer[200];
+	while(1)
+	{
+		ser_readln(buffer, 200);
+		uint8_t ok=0;
+ 1b2:	1b 2d       	mov	r17, r11
+		
+		if (!strcmp(buffer, "Are you Arduino?"))
+		{ser_writeln("I am Arduino!"); ok=1;}
 
-00000120 <ser_init>:
+		if (!strcmp(buffer, "Rol up"))
+ 1b4:	61 e2       	ldi	r22, 0x21	; 33
+ 1b6:	71 e0       	ldi	r23, 0x01	; 1
+ 1b8:	ce 01       	movw	r24, r28
+ 1ba:	01 96       	adiw	r24, 0x01	; 1
+ 1bc:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <strcmp>
+ 1c0:	89 2b       	or	r24, r25
+ 1c2:	01 f5       	brne	.+64     	; 0x204 <main+0xea>
+		{
+			if (status == "up")
+ 1c4:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 1c8:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 1cc:	88 54       	subi	r24, 0x48	; 72
+ 1ce:	91 40       	sbci	r25, 0x01	; 1
+ 1d0:	31 f4       	brne	.+12     	; 0x1de <main+0xc4>
+			{ser_writeln("Already up"); ok=1;}
+ 1d2:	88 e2       	ldi	r24, 0x28	; 40
+ 1d4:	91 e0       	ldi	r25, 0x01	; 1
+ 1d6:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 1da:	10 2f       	mov	r17, r16
+ 1dc:	13 c0       	rjmp	.+38     	; 0x204 <main+0xea>
+			else
+			{
+				ser_writeln("Rolling up");
+ 1de:	83 e3       	ldi	r24, 0x33	; 51
+ 1e0:	91 e0       	ldi	r25, 0x01	; 1
+ 1e2:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+				ser_writeln("OK");
+ 1e6:	8e e3       	ldi	r24, 0x3E	; 62
+ 1e8:	91 e0       	ldi	r25, 0x01	; 1
+ 1ea:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+				rolUp();
+ 1ee:	0e 94 70 01 	call	0x2e0	; 0x2e0 <rolUp>
+				ser_writeln("Rolled up"); ok=1;
+ 1f2:	81 e4       	ldi	r24, 0x41	; 65
+ 1f4:	91 e0       	ldi	r25, 0x01	; 1
+ 1f6:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+				status = "up";
+ 1fa:	d0 92 01 01 	sts	0x0101, r13	; 0x800101 <__data_start+0x1>
+ 1fe:	c0 92 00 01 	sts	0x0100, r12	; 0x800100 <__data_start>
+			else
+			{
+				ser_writeln("Rolling up");
+				ser_writeln("OK");
+				rolUp();
+				ser_writeln("Rolled up"); ok=1;
+ 202:	10 2f       	mov	r17, r16
+				status = "up";
+			}
+		}
+		
+		if (!strcmp(buffer, "Status"))
+ 204:	6b e4       	ldi	r22, 0x4B	; 75
+ 206:	71 e0       	ldi	r23, 0x01	; 1
+ 208:	ce 01       	movw	r24, r28
+ 20a:	01 96       	adiw	r24, 0x01	; 1
+ 20c:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <strcmp>
+ 210:	89 2b       	or	r24, r25
+ 212:	89 f4       	brne	.+34     	; 0x236 <main+0x11c>
+		{
+			if (status == "down")
+ 214:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 218:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 21c:	89 55       	subi	r24, 0x59	; 89
+ 21e:	91 40       	sbci	r25, 0x01	; 1
+ 220:	29 f4       	brne	.+10     	; 0x22c <main+0x112>
+			{
+				ser_writeln("Rolled down"); ok=1;
+ 222:	82 e5       	ldi	r24, 0x52	; 82
+ 224:	91 e0       	ldi	r25, 0x01	; 1
+ 226:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 22a:	3f c0       	rjmp	.+126    	; 0x2aa <main+0x190>
+			}
+			else
+			{
+				ser_writeln("Rolled up"); ok=1;
+ 22c:	81 e4       	ldi	r24, 0x41	; 65
+ 22e:	91 e0       	ldi	r25, 0x01	; 1
+ 230:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 234:	3a c0       	rjmp	.+116    	; 0x2aa <main+0x190>
+			}
+		}
+
+		if (!strcmp(buffer, "Rol down"))
+ 236:	6e e5       	ldi	r22, 0x5E	; 94
+ 238:	71 e0       	ldi	r23, 0x01	; 1
+ 23a:	ce 01       	movw	r24, r28
+ 23c:	01 96       	adiw	r24, 0x01	; 1
+ 23e:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <strcmp>
+ 242:	89 2b       	or	r24, r25
+ 244:	f9 f4       	brne	.+62     	; 0x284 <main+0x16a>
+		{
+			if (status == "down")
+ 246:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 24a:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 24e:	89 55       	subi	r24, 0x59	; 89
+ 250:	91 40       	sbci	r25, 0x01	; 1
+ 252:	29 f4       	brne	.+10     	; 0x25e <main+0x144>
+			{ser_writeln("Already down"); ok=1;}
+ 254:	87 e6       	ldi	r24, 0x67	; 103
+ 256:	91 e0       	ldi	r25, 0x01	; 1
+ 258:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 25c:	1c c0       	rjmp	.+56     	; 0x296 <main+0x17c>
+			else
+			{
+				ser_writeln("Rolling down");
+ 25e:	84 e7       	ldi	r24, 0x74	; 116
+ 260:	91 e0       	ldi	r25, 0x01	; 1
+ 262:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+				ser_writeln("OK");
+ 266:	8e e3       	ldi	r24, 0x3E	; 62
+ 268:	91 e0       	ldi	r25, 0x01	; 1
+ 26a:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+				rolDown();
+ 26e:	0e 94 5e 01 	call	0x2bc	; 0x2bc <rolDown>
+				ser_writeln("Rolled down"); ok=1;
+ 272:	82 e5       	ldi	r24, 0x52	; 82
+ 274:	91 e0       	ldi	r25, 0x01	; 1
+ 276:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+				status = "down";
+ 27a:	f0 92 01 01 	sts	0x0101, r15	; 0x800101 <__data_start+0x1>
+ 27e:	e0 92 00 01 	sts	0x0100, r14	; 0x800100 <__data_start>
+ 282:	09 c0       	rjmp	.+18     	; 0x296 <main+0x17c>
+			}
+		}
+		
+		if (ok==0)
+ 284:	11 11       	cpse	r17, r1
+ 286:	05 c0       	rjmp	.+10     	; 0x292 <main+0x178>
+		{ser_writeln("Unknown command!");}
+ 288:	81 e8       	ldi	r24, 0x81	; 129
+ 28a:	91 e0       	ldi	r25, 0x01	; 1
+ 28c:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 290:	07 c0       	rjmp	.+14     	; 0x2a0 <main+0x186>
+			
+		if (ok==1)
+ 292:	11 30       	cpi	r17, 0x01	; 1
+ 294:	29 f4       	brne	.+10     	; 0x2a0 <main+0x186>
+		{ser_writeln("OK");}
+ 296:	8e e3       	ldi	r24, 0x3E	; 62
+ 298:	91 e0       	ldi	r25, 0x01	; 1
+ 29a:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 29e:	75 cf       	rjmp	.-278    	; 0x18a <main+0x70>
+			
+		else
+		{ser_writeln("ERR");}
+ 2a0:	82 e9       	ldi	r24, 0x92	; 146
+ 2a2:	91 e0       	ldi	r25, 0x01	; 1
+ 2a4:	0e 94 98 01 	call	0x330	; 0x330 <ser_writeln>
+ 2a8:	70 cf       	rjmp	.-288    	; 0x18a <main+0x70>
+			{
+				ser_writeln("Rolled up"); ok=1;
+			}
+		}
+
+		if (!strcmp(buffer, "Rol down"))
+ 2aa:	6e e5       	ldi	r22, 0x5E	; 94
+ 2ac:	71 e0       	ldi	r23, 0x01	; 1
+ 2ae:	ce 01       	movw	r24, r28
+ 2b0:	01 96       	adiw	r24, 0x01	; 1
+ 2b2:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <strcmp>
+ 2b6:	89 2b       	or	r24, r25
+ 2b8:	31 f2       	breq	.-116    	; 0x246 <main+0x12c>
+ 2ba:	ed cf       	rjmp	.-38     	; 0x296 <main+0x17c>
+
+000002bc <rolDown>:
+#define F_CPU 16E6			// CPU frequency
+#include <util/delay.h>
+
+void rolDown()
+{
+	greenLedOff();
+ 2bc:	0e 94 4d 00 	call	0x9a	; 0x9a <greenLedOff>
+	redLedOn();
+ 2c0:	0e 94 5b 00 	call	0xb6	; 0xb6 <redLedOn>
+	yellowLedOn();
+ 2c4:	0e 94 4f 00 	call	0x9e	; 0x9e <yellowLedOn>
+ 2c8:	2f ef       	ldi	r18, 0xFF	; 255
+ 2ca:	83 e2       	ldi	r24, 0x23	; 35
+ 2cc:	94 ef       	ldi	r25, 0xF4	; 244
+ 2ce:	21 50       	subi	r18, 0x01	; 1
+ 2d0:	80 40       	sbci	r24, 0x00	; 0
+ 2d2:	90 40       	sbci	r25, 0x00	; 0
+ 2d4:	e1 f7       	brne	.-8      	; 0x2ce <rolDown+0x12>
+ 2d6:	00 c0       	rjmp	.+0      	; 0x2d8 <rolDown+0x1c>
+ 2d8:	00 00       	nop
+	_delay_ms(5000);
+	yellowLedOff();
+ 2da:	0e 94 55 00 	call	0xaa	; 0xaa <yellowLedOff>
+ 2de:	08 95       	ret
+
+000002e0 <rolUp>:
+}
+
+void rolUp()
+{
+	redLedOff();
+ 2e0:	0e 94 5d 00 	call	0xba	; 0xba <redLedOff>
+	greenLedOn();
+ 2e4:	0e 94 4b 00 	call	0x96	; 0x96 <greenLedOn>
+	yellowLedOn();
+ 2e8:	0e 94 4f 00 	call	0x9e	; 0x9e <yellowLedOn>
+ 2ec:	2f ef       	ldi	r18, 0xFF	; 255
+ 2ee:	83 e2       	ldi	r24, 0x23	; 35
+ 2f0:	94 ef       	ldi	r25, 0xF4	; 244
+ 2f2:	21 50       	subi	r18, 0x01	; 1
+ 2f4:	80 40       	sbci	r24, 0x00	; 0
+ 2f6:	90 40       	sbci	r25, 0x00	; 0
+ 2f8:	e1 f7       	brne	.-8      	; 0x2f2 <rolUp+0x12>
+ 2fa:	00 c0       	rjmp	.+0      	; 0x2fc <rolUp+0x1c>
+ 2fc:	00 00       	nop
+	_delay_ms(5000);
+	yellowLedOff();
+ 2fe:	0e 94 55 00 	call	0xaa	; 0xaa <yellowLedOff>
+ 302:	08 95       	ret
+
+00000304 <ser_init>:
 #define UBBRVAL 51
 
 // Serial init function, enables data-transport in both directions
 void ser_init() {
 	// Set baud rate
 	UBRR0H = 0;
- 120:	10 92 c5 00 	sts	0x00C5, r1	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7e00c5>
+ 304:	10 92 c5 00 	sts	0x00C5, r1	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7e00c5>
 	UBRR0L = UBBRVAL;
- 124:	83 e3       	ldi	r24, 0x33	; 51
- 126:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7e00c4>
+ 308:	83 e3       	ldi	r24, 0x33	; 51
+ 30a:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7e00c4>
 	// disable U2X mode
 	UCSR0A = 0;
- 12a:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7e00c0>
+ 30e:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7e00c0>
 	// enable TX and RX
 	UCSR0B = _BV(RXEN0) | _BV(TXEN0);
- 12e:	88 e1       	ldi	r24, 0x18	; 24
- 130:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7e00c1>
+ 312:	88 e1       	ldi	r24, 0x18	; 24
+ 314:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7e00c1>
 	// set frame format: asynchronous, 8 data bits, 1 stop bit, no parity
 	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);
- 134:	86 e0       	ldi	r24, 0x06	; 6
- 136:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7e00c2>
- 13a:	08 95       	ret
+ 318:	86 e0       	ldi	r24, 0x06	; 6
+ 31a:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7e00c2>
+ 31e:	08 95       	ret
 
-0000013c <ser_write>:
+00000320 <ser_write>:
 
 void ser_write(uint8_t data)
 {
 	// Wait for an empty transmit buffer
 	// UDRE is set when the transmit buffer is empty
 	loop_until_bit_is_set(UCSR0A, UDRE0);
- 13c:	e0 ec       	ldi	r30, 0xC0	; 192
- 13e:	f0 e0       	ldi	r31, 0x00	; 0
- 140:	90 81       	ld	r25, Z
- 142:	95 ff       	sbrs	r25, 5
- 144:	fd cf       	rjmp	.-6      	; 0x140 <ser_write+0x4>
+ 320:	e0 ec       	ldi	r30, 0xC0	; 192
+ 322:	f0 e0       	ldi	r31, 0x00	; 0
+ 324:	90 81       	ld	r25, Z
+ 326:	95 ff       	sbrs	r25, 5
+ 328:	fd cf       	rjmp	.-6      	; 0x324 <ser_write+0x4>
 	// Send data
 	UDR0 = data;
- 146:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
- 14a:	08 95       	ret
+ 32a:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
+ 32e:	08 95       	ret
 
-0000014c <ser_writeln>:
+00000330 <ser_writeln>:
 }
 
 void ser_writeln(char *line)
 {
- 14c:	0f 93       	push	r16
- 14e:	1f 93       	push	r17
- 150:	cf 93       	push	r28
- 152:	df 93       	push	r29
+ 330:	0f 93       	push	r16
+ 332:	1f 93       	push	r17
+ 334:	cf 93       	push	r28
+ 336:	df 93       	push	r29
 	uint8_t lenght = strlen(line);
- 154:	fc 01       	movw	r30, r24
- 156:	01 90       	ld	r0, Z+
- 158:	00 20       	and	r0, r0
- 15a:	e9 f7       	brne	.-6      	; 0x156 <ser_writeln+0xa>
- 15c:	31 97       	sbiw	r30, 0x01	; 1
- 15e:	de 2f       	mov	r29, r30
- 160:	d8 1b       	sub	r29, r24
+ 338:	fc 01       	movw	r30, r24
+ 33a:	01 90       	ld	r0, Z+
+ 33c:	00 20       	and	r0, r0
+ 33e:	e9 f7       	brne	.-6      	; 0x33a <ser_writeln+0xa>
+ 340:	31 97       	sbiw	r30, 0x01	; 1
+ 342:	de 2f       	mov	r29, r30
+ 344:	d8 1b       	sub	r29, r24
 	for (uint8_t p=0; p < lenght ; p++)
- 162:	51 f0       	breq	.+20     	; 0x178 <ser_writeln+0x2c>
- 164:	8c 01       	movw	r16, r24
- 166:	c0 e0       	ldi	r28, 0x00	; 0
+ 346:	51 f0       	breq	.+20     	; 0x35c <ser_writeln+0x2c>
+ 348:	8c 01       	movw	r16, r24
+ 34a:	c0 e0       	ldi	r28, 0x00	; 0
 	{
 		char c = line[p];
 		ser_write(c);
- 168:	f8 01       	movw	r30, r16
- 16a:	81 91       	ld	r24, Z+
- 16c:	8f 01       	movw	r16, r30
- 16e:	0e 94 9e 00 	call	0x13c	; 0x13c <ser_write>
+ 34c:	f8 01       	movw	r30, r16
+ 34e:	81 91       	ld	r24, Z+
+ 350:	8f 01       	movw	r16, r30
+ 352:	0e 94 90 01 	call	0x320	; 0x320 <ser_write>
 }
 
 void ser_writeln(char *line)
 {
 	uint8_t lenght = strlen(line);
 	for (uint8_t p=0; p < lenght ; p++)
- 172:	cf 5f       	subi	r28, 0xFF	; 255
- 174:	dc 13       	cpse	r29, r28
- 176:	f8 cf       	rjmp	.-16     	; 0x168 <ser_writeln+0x1c>
+ 356:	cf 5f       	subi	r28, 0xFF	; 255
+ 358:	dc 13       	cpse	r29, r28
+ 35a:	f8 cf       	rjmp	.-16     	; 0x34c <ser_writeln+0x1c>
 	{
 		char c = line[p];
 		ser_write(c);
 	}
 	ser_write(0x0A);
- 178:	8a e0       	ldi	r24, 0x0A	; 10
- 17a:	0e 94 9e 00 	call	0x13c	; 0x13c <ser_write>
+ 35c:	8a e0       	ldi	r24, 0x0A	; 10
+ 35e:	0e 94 90 01 	call	0x320	; 0x320 <ser_write>
 }
- 17e:	df 91       	pop	r29
- 180:	cf 91       	pop	r28
- 182:	1f 91       	pop	r17
- 184:	0f 91       	pop	r16
- 186:	08 95       	ret
+ 362:	df 91       	pop	r29
+ 364:	cf 91       	pop	r28
+ 366:	1f 91       	pop	r17
+ 368:	0f 91       	pop	r16
+ 36a:	08 95       	ret
 
-00000188 <_exit>:
- 188:	f8 94       	cli
+0000036c <ser_read>:
 
-0000018a <__stop_program>:
- 18a:	ff cf       	rjmp	.-2      	; 0x18a <__stop_program>
+// Serial read function in C
+
+char ser_read() {
+	loop_until_bit_is_set(UCSR0A, RXC0); /* Wait until data exists. */
+ 36c:	e0 ec       	ldi	r30, 0xC0	; 192
+ 36e:	f0 e0       	ldi	r31, 0x00	; 0
+ 370:	80 81       	ld	r24, Z
+ 372:	88 23       	and	r24, r24
+ 374:	ec f7       	brge	.-6      	; 0x370 <ser_read+0x4>
+	return UDR0;
+ 376:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
+}
+ 37a:	08 95       	ret
+
+0000037c <ser_readln>:
+
+// Serial read line function in C (from computer to Arduino)
+
+void ser_readln(char *line, uint8_t bufsize) {
+ 37c:	ef 92       	push	r14
+ 37e:	ff 92       	push	r15
+ 380:	0f 93       	push	r16
+ 382:	1f 93       	push	r17
+ 384:	cf 93       	push	r28
+ 386:	8c 01       	movw	r16, r24
+	uint8_t p=0;
+ 388:	c0 e0       	ldi	r28, 0x00	; 0
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+		}
+		line[p]='\0';
+	} while ((c!='\n') && (p<bufsize-1));
+ 38a:	e6 2e       	mov	r14, r22
+ 38c:	f1 2c       	mov	r15, r1
+ 38e:	81 e0       	ldi	r24, 0x01	; 1
+ 390:	e8 1a       	sub	r14, r24
+ 392:	f1 08       	sbc	r15, r1
+ 394:	01 c0       	rjmp	.+2      	; 0x398 <ser_readln+0x1c>
+	uint8_t p=0;
+	char c;
+	do {
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+ 396:	c2 2f       	mov	r28, r18
+
+void ser_readln(char *line, uint8_t bufsize) {
+	uint8_t p=0;
+	char c;
+	do {
+		c=ser_read();
+ 398:	0e 94 b6 01 	call	0x36c	; 0x36c <ser_read>
+		if (c!='\n') {
+ 39c:	8a 30       	cpi	r24, 0x0A	; 10
+ 39e:	81 f0       	breq	.+32     	; 0x3c0 <ser_readln+0x44>
+			line[p++]=c;
+ 3a0:	21 e0       	ldi	r18, 0x01	; 1
+ 3a2:	2c 0f       	add	r18, r28
+ 3a4:	f8 01       	movw	r30, r16
+ 3a6:	ec 0f       	add	r30, r28
+ 3a8:	f1 1d       	adc	r31, r1
+ 3aa:	80 83       	st	Z, r24
+		}
+		line[p]='\0';
+ 3ac:	82 2f       	mov	r24, r18
+ 3ae:	90 e0       	ldi	r25, 0x00	; 0
+ 3b0:	f8 01       	movw	r30, r16
+ 3b2:	e8 0f       	add	r30, r24
+ 3b4:	f9 1f       	adc	r31, r25
+ 3b6:	10 82       	st	Z, r1
+	} while ((c!='\n') && (p<bufsize-1));
+ 3b8:	8e 15       	cp	r24, r14
+ 3ba:	9f 05       	cpc	r25, r15
+ 3bc:	64 f3       	brlt	.-40     	; 0x396 <ser_readln+0x1a>
+ 3be:	04 c0       	rjmp	.+8      	; 0x3c8 <ser_readln+0x4c>
+	do {
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+		}
+		line[p]='\0';
+ 3c0:	f8 01       	movw	r30, r16
+ 3c2:	ec 0f       	add	r30, r28
+ 3c4:	f1 1d       	adc	r31, r1
+ 3c6:	10 82       	st	Z, r1
+	} while ((c!='\n') && (p<bufsize-1));
+ 3c8:	cf 91       	pop	r28
+ 3ca:	1f 91       	pop	r17
+ 3cc:	0f 91       	pop	r16
+ 3ce:	ff 90       	pop	r15
+ 3d0:	ef 90       	pop	r14
+ 3d2:	08 95       	ret
+
+000003d4 <strcmp>:
+ 3d4:	fb 01       	movw	r30, r22
+ 3d6:	dc 01       	movw	r26, r24
+ 3d8:	8d 91       	ld	r24, X+
+ 3da:	01 90       	ld	r0, Z+
+ 3dc:	80 19       	sub	r24, r0
+ 3de:	01 10       	cpse	r0, r1
+ 3e0:	d9 f3       	breq	.-10     	; 0x3d8 <strcmp+0x4>
+ 3e2:	99 0b       	sbc	r25, r25
+ 3e4:	08 95       	ret
+
+000003e6 <_exit>:
+ 3e6:	f8 94       	cli
+
+000003e8 <__stop_program>:
+ 3e8:	ff cf       	rjmp	.-2      	; 0x3e8 <__stop_program>
