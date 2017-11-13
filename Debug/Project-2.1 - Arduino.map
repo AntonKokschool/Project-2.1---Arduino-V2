@@ -492,13 +492,13 @@ END GROUP
  .debug_abbrev  0x000007a1       0xee rollFunctions.o
  .debug_abbrev  0x0000088f      0x14f serial_functions.o
 
-.debug_line     0x00000000      0x6b9
+.debug_line     0x00000000      0x6bf
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_line    0x0000001a      0x181 ledControl.o
- .debug_line    0x0000019b      0x20b main.o
- .debug_line    0x000003a6      0x162 rollFunctions.o
- .debug_line    0x00000508      0x1b1 serial_functions.o
+ .debug_line    0x0000019b      0x211 main.o
+ .debug_line    0x000003ac      0x162 rollFunctions.o
+ .debug_line    0x0000050e      0x1b1 serial_functions.o
 
 .debug_frame    0x00000000      0x1a8
  *(.debug_frame)
@@ -519,12 +519,12 @@ END GROUP
  .debug_str     0x00000471       0x4b serial_functions.o
                                 0x1e6 (size before relaxing)
 
-.debug_loc      0x00000000      0x41f
+.debug_loc      0x00000000      0x41e
  *(.debug_loc)
  .debug_loc     0x00000000       0x49 ledControl.o
- .debug_loc     0x00000049      0x15e main.o
- .debug_loc     0x000001a7       0x90 rollFunctions.o
- .debug_loc     0x00000237      0x1e8 serial_functions.o
+ .debug_loc     0x00000049      0x15d main.o
+ .debug_loc     0x000001a6       0x90 rollFunctions.o
+ .debug_loc     0x00000236      0x1e8 serial_functions.o
 
 .debug_macinfo
  *(.debug_macinfo)
