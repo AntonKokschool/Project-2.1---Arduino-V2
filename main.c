@@ -14,6 +14,7 @@ volatile status = "up";
 int main(void)
 {
 	ser_init();
+	init_eeprom();
 	_delay_ms(1000);
 	
 	setupLed(); // Setup for led config
@@ -33,6 +34,14 @@ int main(void)
 		
 		if (!strcmp(buffer, "Are you Arduino?"))
 		{ser_writeln("I am Arduino!"); ok=1;}
+		
+		if (!strcmp(buffer, "Set name"))
+		{
+			ser_writeln("What is my new name?"); ok=1;
+			ser_readln(buffer, 200);
+			updatename(buffer);
+			ser_writeln("Name has been set");
+		}
 
 		if (!strcmp(buffer, "Rol up"))
 		{
