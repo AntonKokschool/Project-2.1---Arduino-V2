@@ -4,7 +4,11 @@
 
 ledControl.c
 
+lightsensor.c
+
 main.c
+
+rollFunctions.c
 
 serial_functions.c
 
