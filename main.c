@@ -40,7 +40,8 @@ int main(void)
 			ser_writeln("What is my new name?"); ok=1;
 			ser_readln(buffer, 200);
 			updatename(buffer);
-			ser_writeln("Name has been set");
+			ser_writeln("My name is");
+			ser_writeln(buffer);
 		}
 
 		if (!strcmp(buffer, "Rol up"))

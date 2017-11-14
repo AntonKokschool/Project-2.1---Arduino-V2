@@ -241,7 +241,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x4c6
+.text           0x00000000      0x4ce
  *(.vectors)
  .vectors       0x00000000       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -355,42 +355,42 @@ END GROUP
  .text.__vector_11
                 0x00000168       0x24 ledControl.o
                 0x00000168                __vector_11
- .text.main     0x0000018c      0x1dc main.o
+ .text.main     0x0000018c      0x1e4 main.o
                 0x0000018c                main
- .text.rolDown  0x00000368       0x24 rollFunctions.o
-                0x00000368                rolDown
- .text.rolUp    0x0000038c       0x24 rollFunctions.o
-                0x0000038c                rolUp
+ .text.rolDown  0x00000370       0x24 rollFunctions.o
+                0x00000370                rolDown
+ .text.rolUp    0x00000394       0x24 rollFunctions.o
+                0x00000394                rolUp
  .text.ser_init
-                0x000003b0       0x1c serial_functions.o
-                0x000003b0                ser_init
+                0x000003b8       0x1c serial_functions.o
+                0x000003b8                ser_init
  .text.ser_write
-                0x000003cc       0x10 serial_functions.o
-                0x000003cc                ser_write
+                0x000003d4       0x10 serial_functions.o
+                0x000003d4                ser_write
  .text.ser_writeln
-                0x000003dc       0x3c serial_functions.o
-                0x000003dc                ser_writeln
+                0x000003e4       0x3c serial_functions.o
+                0x000003e4                ser_writeln
  .text.ser_read
-                0x00000418       0x10 serial_functions.o
-                0x00000418                ser_read
+                0x00000420       0x10 serial_functions.o
+                0x00000420                ser_read
  .text.ser_readln
-                0x00000428       0x58 serial_functions.o
-                0x00000428                ser_readln
+                0x00000430       0x58 serial_functions.o
+                0x00000430                ser_readln
  .text.avr-libc
-                0x00000480       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
-                0x00000480                strcmp
+                0x00000488       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x00000488                strcmp
  .text.avr-libc
-                0x00000492       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libatmega328p.a(eeupd_byte.o)
-                0x00000492                eeprom_update_byte
-                0x00000494                eeprom_update_r18
+                0x0000049a       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libatmega328p.a(eeupd_byte.o)
+                0x0000049a                eeprom_update_byte
+                0x0000049c                eeprom_update_r18
  .text.avr-libc
-                0x000004b6        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libatmega328p.a(eeupd_word.o)
-                0x000004b6                eeprom_update_word
-                0x000004c2                . = ALIGN (0x2)
+                0x000004be        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libatmega328p.a(eeupd_word.o)
+                0x000004be                eeprom_update_word
+                0x000004ca                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000004c2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000004c2                _exit
-                0x000004c2                exit
+ .fini9         0x000004ca        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000004ca                _exit
+                0x000004ca                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -409,11 +409,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000004c2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000004ca        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000004c6                _etext = .
+                0x000004ce                _etext = .
 
-.data           0x00800100       0xd0 load address 0x000004c6
+.data           0x00800100       0xc8 load address 0x000004ce
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -425,28 +425,27 @@ END GROUP
                 0x00800102        0x9 eeprom_functions.o
                                   0xc (size before relaxing)
  .rodata.str1.1
-                0x0080010b       0xc4 main.o
-                                 0xcc (size before relaxing)
+                0x0080010b       0xbd main.o
+                                 0xc5 (size before relaxing)
  *(.gnu.linkonce.d*)
-                0x008001d0                . = ALIGN (0x2)
- *fill*         0x008001cf        0x1 
-                0x008001d0                _edata = .
-                0x008001d0                PROVIDE (__data_end, .)
+                0x008001c8                . = ALIGN (0x2)
+                0x008001c8                _edata = .
+                0x008001c8                PROVIDE (__data_end, .)
 
-.bss            0x008001d0        0x0
+.bss            0x008001c8        0x0
                 [!provide]                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
-                0x000004c6                __data_load_start = LOADADDR (.data)
+                0x000004ce                __data_load_start = LOADADDR (.data)
                 0x00000596                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008001d0        0x0
+.noinit         0x008001c8        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008001d0                _end = .
+                0x008001c8                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0xc
@@ -538,14 +537,14 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x16a3
+.debug_info     0x00000000     0x16bd
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x35d eeprom_functions.o
  .debug_info    0x00000951      0x12f ledControl.o
- .debug_info    0x00000a80      0x7cd main.o
- .debug_info    0x0000124d      0x281 rollFunctions.o
- .debug_info    0x000014ce      0x1d5 serial_functions.o
+ .debug_info    0x00000a80      0x7e7 main.o
+ .debug_info    0x00001267      0x281 rollFunctions.o
+ .debug_info    0x000014e8      0x1d5 serial_functions.o
 
 .debug_abbrev   0x00000000      0xaa6
  *(.debug_abbrev)
@@ -556,14 +555,14 @@ END GROUP
  .debug_abbrev  0x00000869       0xee rollFunctions.o
  .debug_abbrev  0x00000957      0x14f serial_functions.o
 
-.debug_line     0x00000000      0x952
+.debug_line     0x00000000      0x958
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_line    0x0000001a      0x269 eeprom_functions.o
  .debug_line    0x00000283      0x181 ledControl.o
- .debug_line    0x00000404      0x23b main.o
- .debug_line    0x0000063f      0x162 rollFunctions.o
- .debug_line    0x000007a1      0x1b1 serial_functions.o
+ .debug_line    0x00000404      0x241 main.o
+ .debug_line    0x00000645      0x162 rollFunctions.o
+ .debug_line    0x000007a7      0x1b1 serial_functions.o
 
 .debug_frame    0x00000000      0x28c
  *(.debug_frame)
@@ -580,9 +579,9 @@ END GROUP
                                 0x30e (size before relaxing)
  .debug_str     0x000004e2       0x6a ledControl.o
                                 0x20c (size before relaxing)
- .debug_str     0x0000054c       0xa1 main.o
-                                0x27a (size before relaxing)
- .debug_str     0x000005ed       0x68 rollFunctions.o
+ .debug_str     0x0000054c       0xf4 main.o
+                                0x24e (size before relaxing)
+ .debug_str     0x00000640       0x15 rollFunctions.o
                                 0x216 (size before relaxing)
  .debug_str     0x00000655       0x4b serial_functions.o
                                 0x1e6 (size before relaxing)

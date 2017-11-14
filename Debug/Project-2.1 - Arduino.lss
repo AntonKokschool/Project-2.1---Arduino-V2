@@ -3,9 +3,9 @@ Project-2.1 - Arduino.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         000000d0  00800100  000004c6  0000055a  2**0
+  0 .data         000000c8  00800100  000004ce  00000562  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000004c6  00000000  00000000  00000094  2**1
+  1 .text         000004ce  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .eeprom       0000000c  00810000  00810000  0000062a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000160  00000000  00000000  000006a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000016a3  00000000  00000000  00000808  2**0
+  6 .debug_info   000016bd  00000000  00000000  00000808  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000aa6  00000000  00000000  00001eab  2**0
+  7 .debug_abbrev 00000aa6  00000000  00000000  00001ec5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000952  00000000  00000000  00002951  2**0
+  8 .debug_line   00000958  00000000  00000000  0000296b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000028c  00000000  00000000  000032a4  2**2
+  9 .debug_frame  0000028c  00000000  00000000  000032c4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000006a0  00000000  00000000  00003530  2**0
+ 10 .debug_str    000006a0  00000000  00000000  00003550  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000539  00000000  00000000  00003bd0  2**0
+ 11 .debug_loc    00000539  00000000  00000000  00003bf0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001a8  00000000  00000000  00004109  2**0
+ 12 .debug_ranges 000001a8  00000000  00000000  00004129  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -72,100 +72,69 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e6 ec       	ldi	r30, 0xC6	; 198
+  7a:	ee ec       	ldi	r30, 0xCE	; 206
   7c:	f4 e0       	ldi	r31, 0x04	; 4
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	a0 3d       	cpi	r26, 0xD0	; 208
+  84:	a8 3c       	cpi	r26, 0xC8	; 200
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
   8a:	0e 94 c6 00 	call	0x18c	; 0x18c <main>
-  8e:	0c 94 61 02 	jmp	0x4c2	; 0x4c2 <_exit>
+  8e:	0c 94 65 02 	jmp	0x4ca	; 0x4ca <_exit>
 
 00000092 <__bad_interrupt>:
   92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000096 <init_eeprom>:
-uint16_t EEMEM minroll_addr;
-
-
-void init_eeprom ()
-{
-	if (eeprom_is_ready())
   96:	f9 99       	sbic	0x1f, 1	; 31
   98:	2c c0       	rjmp	.+88     	; 0xf2 <init_eeprom+0x5c>
-		{
-			eeprom_update_word(name_addr, "Arduino1");
   9a:	62 e0       	ldi	r22, 0x02	; 2
   9c:	71 e0       	ldi	r23, 0x01	; 1
   9e:	80 91 0a 00 	lds	r24, 0x000A	; 0x80000a <__TEXT_REGION_LENGTH__+0x7e000a>
   a2:	90 91 0b 00 	lds	r25, 0x000B	; 0x80000b <__TEXT_REGION_LENGTH__+0x7e000b>
-  a6:	0e 94 5b 02 	call	0x4b6	; 0x4b6 <eeprom_update_word>
-			eeprom_update_word(status_addr, "up");
-  aa:	61 e8       	ldi	r22, 0x81	; 129
+  a6:	0e 94 5f 02 	call	0x4be	; 0x4be <eeprom_update_word>
+  aa:	6a e7       	ldi	r22, 0x7A	; 122
   ac:	71 e0       	ldi	r23, 0x01	; 1
   ae:	80 91 08 00 	lds	r24, 0x0008	; 0x800008 <__TEXT_REGION_LENGTH__+0x7e0008>
   b2:	90 91 09 00 	lds	r25, 0x0009	; 0x800009 <__TEXT_REGION_LENGTH__+0x7e0009>
-  b6:	0e 94 5b 02 	call	0x4b6	; 0x4b6 <eeprom_update_word>
-			eeprom_update_byte(maxt_addr, 0x1E);
+  b6:	0e 94 5f 02 	call	0x4be	; 0x4be <eeprom_update_word>
   ba:	6e e1       	ldi	r22, 0x1E	; 30
   bc:	80 91 06 00 	lds	r24, 0x0006	; 0x800006 <__TEXT_REGION_LENGTH__+0x7e0006>
   c0:	90 91 07 00 	lds	r25, 0x0007	; 0x800007 <__TEXT_REGION_LENGTH__+0x7e0007>
-  c4:	0e 94 49 02 	call	0x492	; 0x492 <eeprom_update_byte>
-			eeprom_update_byte(mint_addr, 0x18);
+  c4:	0e 94 4d 02 	call	0x49a	; 0x49a <eeprom_update_byte>
   c8:	68 e1       	ldi	r22, 0x18	; 24
   ca:	80 91 04 00 	lds	r24, 0x0004	; 0x800004 <__TEXT_REGION_LENGTH__+0x7e0004>
   ce:	90 91 05 00 	lds	r25, 0x0005	; 0x800005 <__TEXT_REGION_LENGTH__+0x7e0005>
-  d2:	0e 94 49 02 	call	0x492	; 0x492 <eeprom_update_byte>
-			eeprom_update_byte(maxroll_addr, 0xA0);
+  d2:	0e 94 4d 02 	call	0x49a	; 0x49a <eeprom_update_byte>
   d6:	60 ea       	ldi	r22, 0xA0	; 160
   d8:	80 91 02 00 	lds	r24, 0x0002	; 0x800002 <__TEXT_REGION_LENGTH__+0x7e0002>
   dc:	90 91 03 00 	lds	r25, 0x0003	; 0x800003 <__TEXT_REGION_LENGTH__+0x7e0003>
-  e0:	0e 94 49 02 	call	0x492	; 0x492 <eeprom_update_byte>
-			eeprom_update_byte(minroll_addr, 0x05);
+  e0:	0e 94 4d 02 	call	0x49a	; 0x49a <eeprom_update_byte>
   e4:	65 e0       	ldi	r22, 0x05	; 5
   e6:	80 91 00 00 	lds	r24, 0x0000	; 0x800000 <__TEXT_REGION_LENGTH__+0x7e0000>
   ea:	90 91 01 00 	lds	r25, 0x0001	; 0x800001 <__TEXT_REGION_LENGTH__+0x7e0001>
-  ee:	0e 94 49 02 	call	0x492	; 0x492 <eeprom_update_byte>
+  ee:	0e 94 4d 02 	call	0x49a	; 0x49a <eeprom_update_byte>
   f2:	08 95       	ret
 
 000000f4 <updatename>:
-		}
-}
-
-void updatename(nameupdate){
-	if(eeprom_is_ready()){
   f4:	f9 99       	sbic	0x1f, 1	; 31
   f6:	07 c0       	rjmp	.+14     	; 0x106 <updatename+0x12>
   f8:	bc 01       	movw	r22, r24
-		eeprom_update_word(name_addr, nameupdate);
   fa:	80 91 0a 00 	lds	r24, 0x000A	; 0x80000a <__TEXT_REGION_LENGTH__+0x7e000a>
   fe:	90 91 0b 00 	lds	r25, 0x000B	; 0x80000b <__TEXT_REGION_LENGTH__+0x7e000b>
- 102:	0e 94 5b 02 	call	0x4b6	; 0x4b6 <eeprom_update_word>
+ 102:	0e 94 5f 02 	call	0x4be	; 0x4be <eeprom_update_word>
  106:	08 95       	ret
 
 00000108 <greenLedOn>:
- 1: Timer1 compare match interrupt example 
- more infos: http://www.letmakerobots.com/node/28278
- created by RobotFreak 
- */
-void greenLedOn(){
-	PORTD |= 0x20;				// Turns on green led
  108:	5d 9a       	sbi	0x0b, 5	; 11
  10a:	08 95       	ret
 
 0000010c <greenLedOff>:
-}
-void greenLedOff(){
-	PORTD &= ~0x20;				// Turns off green led
  10c:	5d 98       	cbi	0x0b, 5	; 11
  10e:	08 95       	ret
 
 00000110 <yellowLedOn>:
-}
-void yellowLedOn(){
-	TIMSK1 |= (1 << OCIE1A);	// enable timer compare interrupt used for yellow led
  110:	ef e6       	ldi	r30, 0x6F	; 111
  112:	f0 e0       	ldi	r31, 0x00	; 0
  114:	80 81       	ld	r24, Z
@@ -174,76 +143,46 @@ void yellowLedOn(){
  11a:	08 95       	ret
 
 0000011c <yellowLedOff>:
-}
-void yellowLedOff(){
-	TIMSK1 &= (1 << ~OCIE1A);	// disable timer compare interrupt used for yellow led
  11c:	ef e6       	ldi	r30, 0x6F	; 111
  11e:	f0 e0       	ldi	r31, 0x00	; 0
  120:	80 81       	ld	r24, Z
  122:	10 82       	st	Z, r1
-	PORTD &= ~0x40;				// Turns off yellow led
  124:	5e 98       	cbi	0x0b, 6	; 11
  126:	08 95       	ret
 
 00000128 <redLedOn>:
-}
-void redLedOn(){
-	PORTD |= 0x80;				// Turns on red led
  128:	5f 9a       	sbi	0x0b, 7	; 11
  12a:	08 95       	ret
 
 0000012c <redLedOff>:
-}
-void redLedOff(){
-	PORTD &= ~0x80;				// Turns off red led
  12c:	5f 98       	cbi	0x0b, 7	; 11
  12e:	08 95       	ret
 
 00000130 <setupLed>:
-}
-void setupLed()
-{
-	DDRD = 0x20 | 0x40 | 0x80;
  130:	80 ee       	ldi	r24, 0xE0	; 224
  132:	8a b9       	out	0x0a, r24	; 10
-	// initialize timer1 
-	cli();						// disable all interrupts
  134:	f8 94       	cli
-	TCCR1A = 0;
  136:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
-	TCCR1B = 0;
  13a:	e1 e8       	ldi	r30, 0x81	; 129
  13c:	f0 e0       	ldi	r31, 0x00	; 0
  13e:	10 82       	st	Z, r1
-	TCNT1  = 0;
  140:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
  144:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
-	
-	OCR1A = 31250;				// compare match register 16MHz/256/2Hz=
  148:	82 e1       	ldi	r24, 0x12	; 18
  14a:	9a e7       	ldi	r25, 0x7A	; 122
  14c:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
  150:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
-	TCCR1B |= (1 << WGM12);		// CTC mode
  154:	80 81       	ld	r24, Z
  156:	88 60       	ori	r24, 0x08	; 8
  158:	80 83       	st	Z, r24
-	TCCR1B |= (1 << CS12);		// 256 prescaler
  15a:	80 81       	ld	r24, Z
  15c:	84 60       	ori	r24, 0x04	; 4
  15e:	80 83       	st	Z, r24
-	yellowLedOff();				
  160:	0e 94 8e 00 	call	0x11c	; 0x11c <yellowLedOff>
-	sei();           // enable all interrupts
  164:	78 94       	sei
  166:	08 95       	ret
 
 00000168 <__vector_11>:
-}
-
-
-ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
-{
  168:	1f 92       	push	r1
  16a:	0f 92       	push	r0
  16c:	0f b6       	in	r0, 0x3f	; 63
@@ -251,7 +190,6 @@ ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
  170:	11 24       	eor	r1, r1
  172:	8f 93       	push	r24
  174:	9f 93       	push	r25
-	PORTD ^= 0x40;				// invert yellow led to on/off state
  176:	9b b1       	in	r25, 0x0b	; 11
  178:	80 e4       	ldi	r24, 0x40	; 64
  17a:	89 27       	eor	r24, r25
@@ -283,7 +221,7 @@ int main(void)
  19e:	0f be       	out	0x3f, r0	; 63
  1a0:	cd bf       	out	0x3d, r28	; 61
 	ser_init();
- 1a2:	0e 94 d8 01 	call	0x3b0	; 0x3b0 <ser_init>
+ 1a2:	0e 94 dc 01 	call	0x3b8	; 0x3b8 <ser_init>
 	init_eeprom();
  1a6:	0e 94 4b 00 	call	0x96	; 0x96 <init_eeprom>
 	#else
@@ -310,7 +248,7 @@ int main(void)
 	if (status == "up")
  1c0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
  1c4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 1c8:	81 58       	subi	r24, 0x81	; 129
+ 1c8:	8a 57       	subi	r24, 0x7A	; 122
  1ca:	91 40       	sbci	r25, 0x01	; 1
  1cc:	11 f4       	brne	.+4      	; 0x1d2 <main+0x46>
 	{greenLedOn();}
@@ -319,7 +257,7 @@ int main(void)
 	if (status == "down")
  1d2:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
  1d6:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 1da:	82 59       	subi	r24, 0x92	; 146
+ 1da:	8b 58       	subi	r24, 0x8B	; 139
  1dc:	91 40       	sbci	r25, 0x01	; 1
  1de:	11 f4       	brne	.+4      	; 0x1e4 <main+0x58>
 	{redLedOn();}
@@ -342,7 +280,7 @@ int main(void)
 				ser_writeln("Rolled up"); ok=1;
 				status = "up";
  1e8:	0f 2e       	mov	r0, r31
- 1ea:	f1 e8       	ldi	r31, 0x81	; 129
+ 1ea:	fa e7       	ldi	r31, 0x7A	; 122
  1ec:	cf 2e       	mov	r12, r31
  1ee:	f1 e0       	ldi	r31, 0x01	; 1
  1f0:	df 2e       	mov	r13, r31
@@ -354,7 +292,7 @@ int main(void)
 				ser_writeln("Rolled down"); ok=1;
 				status = "down";
  1f4:	0f 2e       	mov	r0, r31
- 1f6:	f2 e9       	ldi	r31, 0x92	; 146
+ 1f6:	fb e8       	ldi	r31, 0x8B	; 139
  1f8:	ef 2e       	mov	r14, r31
  1fa:	f1 e0       	ldi	r31, 0x01	; 1
  1fc:	ff 2e       	mov	r15, r31
@@ -369,7 +307,7 @@ int main(void)
  202:	70 e0       	ldi	r23, 0x00	; 0
  204:	ce 01       	movw	r24, r28
  206:	01 96       	adiw	r24, 0x01	; 1
- 208:	0e 94 14 02 	call	0x428	; 0x428 <ser_readln>
+ 208:	0e 94 18 02 	call	0x430	; 0x430 <ser_readln>
 		uint8_t ok=0;
 		
 		if (!strcmp(buffer, "Are you Arduino?"))
@@ -377,13 +315,13 @@ int main(void)
  20e:	71 e0       	ldi	r23, 0x01	; 1
  210:	ce 01       	movw	r24, r28
  212:	01 96       	adiw	r24, 0x01	; 1
- 214:	0e 94 40 02 	call	0x480	; 0x480 <strcmp>
+ 214:	0e 94 44 02 	call	0x488	; 0x488 <strcmp>
  218:	89 2b       	or	r24, r25
  21a:	31 f4       	brne	.+12     	; 0x228 <main+0x9c>
 		{ser_writeln("I am Arduino!"); ok=1;}
  21c:	8c e1       	ldi	r24, 0x1C	; 28
  21e:	91 e0       	ldi	r25, 0x01	; 1
- 220:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 220:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
  224:	10 2f       	mov	r17, r16
  226:	01 c0       	rjmp	.+2      	; 0x22a <main+0x9e>
 	
@@ -402,382 +340,489 @@ int main(void)
  22c:	71 e0       	ldi	r23, 0x01	; 1
  22e:	ce 01       	movw	r24, r28
  230:	01 96       	adiw	r24, 0x01	; 1
- 232:	0e 94 40 02 	call	0x480	; 0x480 <strcmp>
+ 232:	0e 94 44 02 	call	0x488	; 0x488 <strcmp>
  236:	89 2b       	or	r24, r25
- 238:	99 f4       	brne	.+38     	; 0x260 <main+0xd4>
+ 238:	b9 f4       	brne	.+46     	; 0x268 <main+0xdc>
 		{
 			ser_writeln("What is my new name?"); ok=1;
  23a:	83 e3       	ldi	r24, 0x33	; 51
  23c:	91 e0       	ldi	r25, 0x01	; 1
- 23e:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 23e:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
 			ser_readln(buffer, 200);
  242:	68 ec       	ldi	r22, 0xC8	; 200
  244:	70 e0       	ldi	r23, 0x00	; 0
  246:	ce 01       	movw	r24, r28
  248:	01 96       	adiw	r24, 0x01	; 1
- 24a:	0e 94 14 02 	call	0x428	; 0x428 <ser_readln>
+ 24a:	0e 94 18 02 	call	0x430	; 0x430 <ser_readln>
 			updatename(buffer);
  24e:	ce 01       	movw	r24, r28
  250:	01 96       	adiw	r24, 0x01	; 1
  252:	0e 94 7a 00 	call	0xf4	; 0xf4 <updatename>
-			ser_writeln("Name has been set");
+			ser_writeln("My name is");
  256:	88 e4       	ldi	r24, 0x48	; 72
  258:	91 e0       	ldi	r25, 0x01	; 1
- 25a:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 25a:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+			ser_writeln(buffer);
+ 25e:	ce 01       	movw	r24, r28
+ 260:	01 96       	adiw	r24, 0x01	; 1
+ 262:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
 		if (!strcmp(buffer, "Are you Arduino?"))
 		{ser_writeln("I am Arduino!"); ok=1;}
 		
 		if (!strcmp(buffer, "Set name"))
 		{
 			ser_writeln("What is my new name?"); ok=1;
- 25e:	10 2f       	mov	r17, r16
-			ser_readln(buffer, 200);
+ 266:	10 2f       	mov	r17, r16
 			updatename(buffer);
-			ser_writeln("Name has been set");
+			ser_writeln("My name is");
+			ser_writeln(buffer);
 		}
 
 		if (!strcmp(buffer, "Rol up"))
- 260:	6a e5       	ldi	r22, 0x5A	; 90
- 262:	71 e0       	ldi	r23, 0x01	; 1
- 264:	ce 01       	movw	r24, r28
- 266:	01 96       	adiw	r24, 0x01	; 1
- 268:	0e 94 40 02 	call	0x480	; 0x480 <strcmp>
- 26c:	89 2b       	or	r24, r25
- 26e:	01 f5       	brne	.+64     	; 0x2b0 <main+0x124>
+ 268:	63 e5       	ldi	r22, 0x53	; 83
+ 26a:	71 e0       	ldi	r23, 0x01	; 1
+ 26c:	ce 01       	movw	r24, r28
+ 26e:	01 96       	adiw	r24, 0x01	; 1
+ 270:	0e 94 44 02 	call	0x488	; 0x488 <strcmp>
+ 274:	89 2b       	or	r24, r25
+ 276:	01 f5       	brne	.+64     	; 0x2b8 <main+0x12c>
 		{
 			if (status == "up")
- 270:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 274:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 278:	81 58       	subi	r24, 0x81	; 129
- 27a:	91 40       	sbci	r25, 0x01	; 1
- 27c:	31 f4       	brne	.+12     	; 0x28a <main+0xfe>
+ 278:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 27c:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 280:	8a 57       	subi	r24, 0x7A	; 122
+ 282:	91 40       	sbci	r25, 0x01	; 1
+ 284:	31 f4       	brne	.+12     	; 0x292 <main+0x106>
 			{ser_writeln("Already up"); ok=1;}
- 27e:	81 e6       	ldi	r24, 0x61	; 97
- 280:	91 e0       	ldi	r25, 0x01	; 1
- 282:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 286:	10 2f       	mov	r17, r16
- 288:	13 c0       	rjmp	.+38     	; 0x2b0 <main+0x124>
+ 286:	8a e5       	ldi	r24, 0x5A	; 90
+ 288:	91 e0       	ldi	r25, 0x01	; 1
+ 28a:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 28e:	10 2f       	mov	r17, r16
+ 290:	13 c0       	rjmp	.+38     	; 0x2b8 <main+0x12c>
 			else
 			{
 				ser_writeln("Rolling up");
- 28a:	8c e6       	ldi	r24, 0x6C	; 108
- 28c:	91 e0       	ldi	r25, 0x01	; 1
- 28e:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
-				ser_writeln("OK");
- 292:	87 e7       	ldi	r24, 0x77	; 119
+ 292:	85 e6       	ldi	r24, 0x65	; 101
  294:	91 e0       	ldi	r25, 0x01	; 1
- 296:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 296:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+				ser_writeln("OK");
+ 29a:	80 e7       	ldi	r24, 0x70	; 112
+ 29c:	91 e0       	ldi	r25, 0x01	; 1
+ 29e:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
 				rolUp();
- 29a:	0e 94 c6 01 	call	0x38c	; 0x38c <rolUp>
+ 2a2:	0e 94 ca 01 	call	0x394	; 0x394 <rolUp>
 				ser_writeln("Rolled up"); ok=1;
- 29e:	8a e7       	ldi	r24, 0x7A	; 122
- 2a0:	91 e0       	ldi	r25, 0x01	; 1
- 2a2:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 2a6:	83 e7       	ldi	r24, 0x73	; 115
+ 2a8:	91 e0       	ldi	r25, 0x01	; 1
+ 2aa:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
 				status = "up";
- 2a6:	d0 92 01 01 	sts	0x0101, r13	; 0x800101 <__data_start+0x1>
- 2aa:	c0 92 00 01 	sts	0x0100, r12	; 0x800100 <__data_start>
+ 2ae:	d0 92 01 01 	sts	0x0101, r13	; 0x800101 <__data_start+0x1>
+ 2b2:	c0 92 00 01 	sts	0x0100, r12	; 0x800100 <__data_start>
 			else
 			{
 				ser_writeln("Rolling up");
 				ser_writeln("OK");
 				rolUp();
 				ser_writeln("Rolled up"); ok=1;
- 2ae:	10 2f       	mov	r17, r16
+ 2b6:	10 2f       	mov	r17, r16
 				status = "up";
 			}
 		}
 		
 		if (!strcmp(buffer, "Status"))
- 2b0:	64 e8       	ldi	r22, 0x84	; 132
- 2b2:	71 e0       	ldi	r23, 0x01	; 1
- 2b4:	ce 01       	movw	r24, r28
- 2b6:	01 96       	adiw	r24, 0x01	; 1
- 2b8:	0e 94 40 02 	call	0x480	; 0x480 <strcmp>
- 2bc:	89 2b       	or	r24, r25
- 2be:	89 f4       	brne	.+34     	; 0x2e2 <main+0x156>
+ 2b8:	6d e7       	ldi	r22, 0x7D	; 125
+ 2ba:	71 e0       	ldi	r23, 0x01	; 1
+ 2bc:	ce 01       	movw	r24, r28
+ 2be:	01 96       	adiw	r24, 0x01	; 1
+ 2c0:	0e 94 44 02 	call	0x488	; 0x488 <strcmp>
+ 2c4:	89 2b       	or	r24, r25
+ 2c6:	89 f4       	brne	.+34     	; 0x2ea <main+0x15e>
 		{
 			if (status == "down")
- 2c0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 2c4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 2c8:	82 59       	subi	r24, 0x92	; 146
- 2ca:	91 40       	sbci	r25, 0x01	; 1
- 2cc:	29 f4       	brne	.+10     	; 0x2d8 <main+0x14c>
+ 2c8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 2cc:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 2d0:	8b 58       	subi	r24, 0x8B	; 139
+ 2d2:	91 40       	sbci	r25, 0x01	; 1
+ 2d4:	29 f4       	brne	.+10     	; 0x2e0 <main+0x154>
 			{
 				ser_writeln("Rolled down"); ok=1;
- 2ce:	8b e8       	ldi	r24, 0x8B	; 139
- 2d0:	91 e0       	ldi	r25, 0x01	; 1
- 2d2:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 2d6:	3f c0       	rjmp	.+126    	; 0x356 <main+0x1ca>
+ 2d6:	84 e8       	ldi	r24, 0x84	; 132
+ 2d8:	91 e0       	ldi	r25, 0x01	; 1
+ 2da:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 2de:	3f c0       	rjmp	.+126    	; 0x35e <main+0x1d2>
 			}
 			else
 			{
 				ser_writeln("Rolled up"); ok=1;
- 2d8:	8a e7       	ldi	r24, 0x7A	; 122
- 2da:	91 e0       	ldi	r25, 0x01	; 1
- 2dc:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 2e0:	3a c0       	rjmp	.+116    	; 0x356 <main+0x1ca>
+ 2e0:	83 e7       	ldi	r24, 0x73	; 115
+ 2e2:	91 e0       	ldi	r25, 0x01	; 1
+ 2e4:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 2e8:	3a c0       	rjmp	.+116    	; 0x35e <main+0x1d2>
 			}
 		}
 
 		if (!strcmp(buffer, "Rol down"))
- 2e2:	67 e9       	ldi	r22, 0x97	; 151
- 2e4:	71 e0       	ldi	r23, 0x01	; 1
- 2e6:	ce 01       	movw	r24, r28
- 2e8:	01 96       	adiw	r24, 0x01	; 1
- 2ea:	0e 94 40 02 	call	0x480	; 0x480 <strcmp>
- 2ee:	89 2b       	or	r24, r25
- 2f0:	f9 f4       	brne	.+62     	; 0x330 <main+0x1a4>
+ 2ea:	60 e9       	ldi	r22, 0x90	; 144
+ 2ec:	71 e0       	ldi	r23, 0x01	; 1
+ 2ee:	ce 01       	movw	r24, r28
+ 2f0:	01 96       	adiw	r24, 0x01	; 1
+ 2f2:	0e 94 44 02 	call	0x488	; 0x488 <strcmp>
+ 2f6:	89 2b       	or	r24, r25
+ 2f8:	f9 f4       	brne	.+62     	; 0x338 <main+0x1ac>
 		{
 			if (status == "down")
- 2f2:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 2f6:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 2fa:	82 59       	subi	r24, 0x92	; 146
- 2fc:	91 40       	sbci	r25, 0x01	; 1
- 2fe:	29 f4       	brne	.+10     	; 0x30a <main+0x17e>
+ 2fa:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 2fe:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 302:	8b 58       	subi	r24, 0x8B	; 139
+ 304:	91 40       	sbci	r25, 0x01	; 1
+ 306:	29 f4       	brne	.+10     	; 0x312 <main+0x186>
 			{ser_writeln("Already down"); ok=1;}
- 300:	80 ea       	ldi	r24, 0xA0	; 160
- 302:	91 e0       	ldi	r25, 0x01	; 1
- 304:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 308:	1c c0       	rjmp	.+56     	; 0x342 <main+0x1b6>
+ 308:	89 e9       	ldi	r24, 0x99	; 153
+ 30a:	91 e0       	ldi	r25, 0x01	; 1
+ 30c:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 310:	1c c0       	rjmp	.+56     	; 0x34a <main+0x1be>
 			else
 			{
 				ser_writeln("Rolling down");
- 30a:	8d ea       	ldi	r24, 0xAD	; 173
- 30c:	91 e0       	ldi	r25, 0x01	; 1
- 30e:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
-				ser_writeln("OK");
- 312:	87 e7       	ldi	r24, 0x77	; 119
+ 312:	86 ea       	ldi	r24, 0xA6	; 166
  314:	91 e0       	ldi	r25, 0x01	; 1
- 316:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 316:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+				ser_writeln("OK");
+ 31a:	80 e7       	ldi	r24, 0x70	; 112
+ 31c:	91 e0       	ldi	r25, 0x01	; 1
+ 31e:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
 				rolDown();
- 31a:	0e 94 b4 01 	call	0x368	; 0x368 <rolDown>
+ 322:	0e 94 b8 01 	call	0x370	; 0x370 <rolDown>
 				ser_writeln("Rolled down"); ok=1;
- 31e:	8b e8       	ldi	r24, 0x8B	; 139
- 320:	91 e0       	ldi	r25, 0x01	; 1
- 322:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
+ 326:	84 e8       	ldi	r24, 0x84	; 132
+ 328:	91 e0       	ldi	r25, 0x01	; 1
+ 32a:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
 				status = "down";
- 326:	f0 92 01 01 	sts	0x0101, r15	; 0x800101 <__data_start+0x1>
- 32a:	e0 92 00 01 	sts	0x0100, r14	; 0x800100 <__data_start>
- 32e:	09 c0       	rjmp	.+18     	; 0x342 <main+0x1b6>
+ 32e:	f0 92 01 01 	sts	0x0101, r15	; 0x800101 <__data_start+0x1>
+ 332:	e0 92 00 01 	sts	0x0100, r14	; 0x800100 <__data_start>
+ 336:	09 c0       	rjmp	.+18     	; 0x34a <main+0x1be>
 			}
 		}
 		
 		if (ok==0)
- 330:	11 11       	cpse	r17, r1
- 332:	05 c0       	rjmp	.+10     	; 0x33e <main+0x1b2>
+ 338:	11 11       	cpse	r17, r1
+ 33a:	05 c0       	rjmp	.+10     	; 0x346 <main+0x1ba>
 		{ser_writeln("Unknown command!");}
- 334:	8a eb       	ldi	r24, 0xBA	; 186
- 336:	91 e0       	ldi	r25, 0x01	; 1
- 338:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 33c:	07 c0       	rjmp	.+14     	; 0x34c <main+0x1c0>
+ 33c:	83 eb       	ldi	r24, 0xB3	; 179
+ 33e:	91 e0       	ldi	r25, 0x01	; 1
+ 340:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 344:	07 c0       	rjmp	.+14     	; 0x354 <main+0x1c8>
 			
 		if (ok==1)
- 33e:	11 30       	cpi	r17, 0x01	; 1
- 340:	29 f4       	brne	.+10     	; 0x34c <main+0x1c0>
+ 346:	11 30       	cpi	r17, 0x01	; 1
+ 348:	29 f4       	brne	.+10     	; 0x354 <main+0x1c8>
 		{ser_writeln("OK");}
- 342:	87 e7       	ldi	r24, 0x77	; 119
- 344:	91 e0       	ldi	r25, 0x01	; 1
- 346:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 34a:	5a cf       	rjmp	.-332    	; 0x200 <main+0x74>
+ 34a:	80 e7       	ldi	r24, 0x70	; 112
+ 34c:	91 e0       	ldi	r25, 0x01	; 1
+ 34e:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 352:	56 cf       	rjmp	.-340    	; 0x200 <main+0x74>
 			
 		else
 		{ser_writeln("ERR");}
- 34c:	8b ec       	ldi	r24, 0xCB	; 203
- 34e:	91 e0       	ldi	r25, 0x01	; 1
- 350:	0e 94 ee 01 	call	0x3dc	; 0x3dc <ser_writeln>
- 354:	55 cf       	rjmp	.-342    	; 0x200 <main+0x74>
+ 354:	84 ec       	ldi	r24, 0xC4	; 196
+ 356:	91 e0       	ldi	r25, 0x01	; 1
+ 358:	0e 94 f2 01 	call	0x3e4	; 0x3e4 <ser_writeln>
+ 35c:	51 cf       	rjmp	.-350    	; 0x200 <main+0x74>
 			{
 				ser_writeln("Rolled up"); ok=1;
 			}
 		}
 
 		if (!strcmp(buffer, "Rol down"))
- 356:	67 e9       	ldi	r22, 0x97	; 151
- 358:	71 e0       	ldi	r23, 0x01	; 1
- 35a:	ce 01       	movw	r24, r28
- 35c:	01 96       	adiw	r24, 0x01	; 1
- 35e:	0e 94 40 02 	call	0x480	; 0x480 <strcmp>
- 362:	89 2b       	or	r24, r25
- 364:	31 f2       	breq	.-116    	; 0x2f2 <main+0x166>
- 366:	ed cf       	rjmp	.-38     	; 0x342 <main+0x1b6>
+ 35e:	60 e9       	ldi	r22, 0x90	; 144
+ 360:	71 e0       	ldi	r23, 0x01	; 1
+ 362:	ce 01       	movw	r24, r28
+ 364:	01 96       	adiw	r24, 0x01	; 1
+ 366:	0e 94 44 02 	call	0x488	; 0x488 <strcmp>
+ 36a:	89 2b       	or	r24, r25
+ 36c:	31 f2       	breq	.-116    	; 0x2fa <main+0x16e>
+ 36e:	ed cf       	rjmp	.-38     	; 0x34a <main+0x1be>
 
-00000368 <rolDown>:
- 368:	0e 94 86 00 	call	0x10c	; 0x10c <greenLedOff>
- 36c:	0e 94 94 00 	call	0x128	; 0x128 <redLedOn>
- 370:	0e 94 88 00 	call	0x110	; 0x110 <yellowLedOn>
- 374:	2f ef       	ldi	r18, 0xFF	; 255
- 376:	83 e2       	ldi	r24, 0x23	; 35
- 378:	94 ef       	ldi	r25, 0xF4	; 244
- 37a:	21 50       	subi	r18, 0x01	; 1
- 37c:	80 40       	sbci	r24, 0x00	; 0
- 37e:	90 40       	sbci	r25, 0x00	; 0
- 380:	e1 f7       	brne	.-8      	; 0x37a <rolDown+0x12>
- 382:	00 c0       	rjmp	.+0      	; 0x384 <rolDown+0x1c>
- 384:	00 00       	nop
- 386:	0e 94 8e 00 	call	0x11c	; 0x11c <yellowLedOff>
- 38a:	08 95       	ret
+00000370 <rolDown>:
+#define F_CPU 16E6			// CPU frequency
+#include <util/delay.h>
 
-0000038c <rolUp>:
- 38c:	0e 94 96 00 	call	0x12c	; 0x12c <redLedOff>
- 390:	0e 94 84 00 	call	0x108	; 0x108 <greenLedOn>
- 394:	0e 94 88 00 	call	0x110	; 0x110 <yellowLedOn>
- 398:	2f ef       	ldi	r18, 0xFF	; 255
- 39a:	83 e2       	ldi	r24, 0x23	; 35
- 39c:	94 ef       	ldi	r25, 0xF4	; 244
- 39e:	21 50       	subi	r18, 0x01	; 1
- 3a0:	80 40       	sbci	r24, 0x00	; 0
- 3a2:	90 40       	sbci	r25, 0x00	; 0
- 3a4:	e1 f7       	brne	.-8      	; 0x39e <rolUp+0x12>
- 3a6:	00 c0       	rjmp	.+0      	; 0x3a8 <rolUp+0x1c>
- 3a8:	00 00       	nop
- 3aa:	0e 94 8e 00 	call	0x11c	; 0x11c <yellowLedOff>
- 3ae:	08 95       	ret
+void rolDown()
+{
+	greenLedOff();
+ 370:	0e 94 86 00 	call	0x10c	; 0x10c <greenLedOff>
+	redLedOn();
+ 374:	0e 94 94 00 	call	0x128	; 0x128 <redLedOn>
+	yellowLedOn();
+ 378:	0e 94 88 00 	call	0x110	; 0x110 <yellowLedOn>
+ 37c:	2f ef       	ldi	r18, 0xFF	; 255
+ 37e:	83 e2       	ldi	r24, 0x23	; 35
+ 380:	94 ef       	ldi	r25, 0xF4	; 244
+ 382:	21 50       	subi	r18, 0x01	; 1
+ 384:	80 40       	sbci	r24, 0x00	; 0
+ 386:	90 40       	sbci	r25, 0x00	; 0
+ 388:	e1 f7       	brne	.-8      	; 0x382 <rolDown+0x12>
+ 38a:	00 c0       	rjmp	.+0      	; 0x38c <rolDown+0x1c>
+ 38c:	00 00       	nop
+	_delay_ms(5000);
+	yellowLedOff();
+ 38e:	0e 94 8e 00 	call	0x11c	; 0x11c <yellowLedOff>
+ 392:	08 95       	ret
 
-000003b0 <ser_init>:
- 3b0:	10 92 c5 00 	sts	0x00C5, r1	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7e00c5>
- 3b4:	83 e3       	ldi	r24, 0x33	; 51
- 3b6:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7e00c4>
- 3ba:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7e00c0>
- 3be:	88 e1       	ldi	r24, 0x18	; 24
- 3c0:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7e00c1>
- 3c4:	86 e0       	ldi	r24, 0x06	; 6
- 3c6:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7e00c2>
- 3ca:	08 95       	ret
+00000394 <rolUp>:
+}
 
-000003cc <ser_write>:
- 3cc:	e0 ec       	ldi	r30, 0xC0	; 192
- 3ce:	f0 e0       	ldi	r31, 0x00	; 0
- 3d0:	90 81       	ld	r25, Z
- 3d2:	95 ff       	sbrs	r25, 5
- 3d4:	fd cf       	rjmp	.-6      	; 0x3d0 <ser_write+0x4>
- 3d6:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
- 3da:	08 95       	ret
+void rolUp()
+{
+	redLedOff();
+ 394:	0e 94 96 00 	call	0x12c	; 0x12c <redLedOff>
+	greenLedOn();
+ 398:	0e 94 84 00 	call	0x108	; 0x108 <greenLedOn>
+	yellowLedOn();
+ 39c:	0e 94 88 00 	call	0x110	; 0x110 <yellowLedOn>
+ 3a0:	2f ef       	ldi	r18, 0xFF	; 255
+ 3a2:	83 e2       	ldi	r24, 0x23	; 35
+ 3a4:	94 ef       	ldi	r25, 0xF4	; 244
+ 3a6:	21 50       	subi	r18, 0x01	; 1
+ 3a8:	80 40       	sbci	r24, 0x00	; 0
+ 3aa:	90 40       	sbci	r25, 0x00	; 0
+ 3ac:	e1 f7       	brne	.-8      	; 0x3a6 <rolUp+0x12>
+ 3ae:	00 c0       	rjmp	.+0      	; 0x3b0 <rolUp+0x1c>
+ 3b0:	00 00       	nop
+	_delay_ms(5000);
+	yellowLedOff();
+ 3b2:	0e 94 8e 00 	call	0x11c	; 0x11c <yellowLedOff>
+ 3b6:	08 95       	ret
 
-000003dc <ser_writeln>:
- 3dc:	0f 93       	push	r16
- 3de:	1f 93       	push	r17
- 3e0:	cf 93       	push	r28
- 3e2:	df 93       	push	r29
- 3e4:	fc 01       	movw	r30, r24
- 3e6:	01 90       	ld	r0, Z+
- 3e8:	00 20       	and	r0, r0
- 3ea:	e9 f7       	brne	.-6      	; 0x3e6 <ser_writeln+0xa>
- 3ec:	31 97       	sbiw	r30, 0x01	; 1
- 3ee:	de 2f       	mov	r29, r30
- 3f0:	d8 1b       	sub	r29, r24
- 3f2:	51 f0       	breq	.+20     	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
- 3f4:	8c 01       	movw	r16, r24
- 3f6:	c0 e0       	ldi	r28, 0x00	; 0
- 3f8:	f8 01       	movw	r30, r16
- 3fa:	81 91       	ld	r24, Z+
- 3fc:	8f 01       	movw	r16, r30
- 3fe:	0e 94 e6 01 	call	0x3cc	; 0x3cc <ser_write>
- 402:	cf 5f       	subi	r28, 0xFF	; 255
- 404:	dc 13       	cpse	r29, r28
- 406:	f8 cf       	rjmp	.-16     	; 0x3f8 <ser_writeln+0x1c>
- 408:	8a e0       	ldi	r24, 0x0A	; 10
- 40a:	0e 94 e6 01 	call	0x3cc	; 0x3cc <ser_write>
- 40e:	df 91       	pop	r29
- 410:	cf 91       	pop	r28
- 412:	1f 91       	pop	r17
- 414:	0f 91       	pop	r16
- 416:	08 95       	ret
+000003b8 <ser_init>:
+#define UBBRVAL 51
 
-00000418 <ser_read>:
- 418:	e0 ec       	ldi	r30, 0xC0	; 192
- 41a:	f0 e0       	ldi	r31, 0x00	; 0
- 41c:	80 81       	ld	r24, Z
- 41e:	88 23       	and	r24, r24
- 420:	ec f7       	brge	.-6      	; 0x41c <ser_read+0x4>
- 422:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
- 426:	08 95       	ret
+// Serial init function, enables data-transport in both directions
+void ser_init() {
+	// Set baud rate
+	UBRR0H = 0;
+ 3b8:	10 92 c5 00 	sts	0x00C5, r1	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7e00c5>
+	UBRR0L = UBBRVAL;
+ 3bc:	83 e3       	ldi	r24, 0x33	; 51
+ 3be:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7e00c4>
+	// disable U2X mode
+	UCSR0A = 0;
+ 3c2:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7e00c0>
+	// enable TX and RX
+	UCSR0B = _BV(RXEN0) | _BV(TXEN0);
+ 3c6:	88 e1       	ldi	r24, 0x18	; 24
+ 3c8:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7e00c1>
+	// set frame format: asynchronous, 8 data bits, 1 stop bit, no parity
+	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);
+ 3cc:	86 e0       	ldi	r24, 0x06	; 6
+ 3ce:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7e00c2>
+ 3d2:	08 95       	ret
 
-00000428 <ser_readln>:
- 428:	ef 92       	push	r14
- 42a:	ff 92       	push	r15
- 42c:	0f 93       	push	r16
- 42e:	1f 93       	push	r17
- 430:	cf 93       	push	r28
- 432:	8c 01       	movw	r16, r24
- 434:	c0 e0       	ldi	r28, 0x00	; 0
- 436:	e6 2e       	mov	r14, r22
- 438:	f1 2c       	mov	r15, r1
- 43a:	81 e0       	ldi	r24, 0x01	; 1
- 43c:	e8 1a       	sub	r14, r24
- 43e:	f1 08       	sbc	r15, r1
- 440:	01 c0       	rjmp	.+2      	; 0x444 <ser_readln+0x1c>
- 442:	c2 2f       	mov	r28, r18
- 444:	0e 94 0c 02 	call	0x418	; 0x418 <ser_read>
- 448:	8a 30       	cpi	r24, 0x0A	; 10
- 44a:	81 f0       	breq	.+32     	; 0x46c <ser_readln+0x44>
- 44c:	21 e0       	ldi	r18, 0x01	; 1
- 44e:	2c 0f       	add	r18, r28
- 450:	f8 01       	movw	r30, r16
- 452:	ec 0f       	add	r30, r28
- 454:	f1 1d       	adc	r31, r1
- 456:	80 83       	st	Z, r24
- 458:	82 2f       	mov	r24, r18
- 45a:	90 e0       	ldi	r25, 0x00	; 0
- 45c:	f8 01       	movw	r30, r16
- 45e:	e8 0f       	add	r30, r24
- 460:	f9 1f       	adc	r31, r25
- 462:	10 82       	st	Z, r1
- 464:	8e 15       	cp	r24, r14
- 466:	9f 05       	cpc	r25, r15
- 468:	64 f3       	brlt	.-40     	; 0x442 <ser_readln+0x1a>
- 46a:	04 c0       	rjmp	.+8      	; 0x474 <ser_readln+0x4c>
- 46c:	f8 01       	movw	r30, r16
- 46e:	ec 0f       	add	r30, r28
- 470:	f1 1d       	adc	r31, r1
- 472:	10 82       	st	Z, r1
- 474:	cf 91       	pop	r28
- 476:	1f 91       	pop	r17
- 478:	0f 91       	pop	r16
- 47a:	ff 90       	pop	r15
- 47c:	ef 90       	pop	r14
- 47e:	08 95       	ret
+000003d4 <ser_write>:
 
-00000480 <strcmp>:
- 480:	fb 01       	movw	r30, r22
- 482:	dc 01       	movw	r26, r24
- 484:	8d 91       	ld	r24, X+
- 486:	01 90       	ld	r0, Z+
- 488:	80 19       	sub	r24, r0
- 48a:	01 10       	cpse	r0, r1
- 48c:	d9 f3       	breq	.-10     	; 0x484 <strcmp+0x4>
- 48e:	99 0b       	sbc	r25, r25
- 490:	08 95       	ret
+void ser_write(uint8_t data)
+{
+	// Wait for an empty transmit buffer
+	// UDRE is set when the transmit buffer is empty
+	loop_until_bit_is_set(UCSR0A, UDRE0);
+ 3d4:	e0 ec       	ldi	r30, 0xC0	; 192
+ 3d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d8:	90 81       	ld	r25, Z
+ 3da:	95 ff       	sbrs	r25, 5
+ 3dc:	fd cf       	rjmp	.-6      	; 0x3d8 <ser_write+0x4>
+	// Send data
+	UDR0 = data;
+ 3de:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
+ 3e2:	08 95       	ret
 
-00000492 <eeprom_update_byte>:
- 492:	26 2f       	mov	r18, r22
+000003e4 <ser_writeln>:
+}
 
-00000494 <eeprom_update_r18>:
- 494:	f9 99       	sbic	0x1f, 1	; 31
- 496:	fe cf       	rjmp	.-4      	; 0x494 <eeprom_update_r18>
- 498:	92 bd       	out	0x22, r25	; 34
- 49a:	81 bd       	out	0x21, r24	; 33
- 49c:	f8 9a       	sbi	0x1f, 0	; 31
- 49e:	01 97       	sbiw	r24, 0x01	; 1
- 4a0:	00 b4       	in	r0, 0x20	; 32
- 4a2:	02 16       	cp	r0, r18
- 4a4:	39 f0       	breq	.+14     	; 0x4b4 <eeprom_update_r18+0x20>
- 4a6:	1f ba       	out	0x1f, r1	; 31
- 4a8:	20 bd       	out	0x20, r18	; 32
- 4aa:	0f b6       	in	r0, 0x3f	; 63
- 4ac:	f8 94       	cli
- 4ae:	fa 9a       	sbi	0x1f, 2	; 31
- 4b0:	f9 9a       	sbi	0x1f, 1	; 31
- 4b2:	0f be       	out	0x3f, r0	; 63
- 4b4:	08 95       	ret
+void ser_writeln(char *line)
+{
+ 3e4:	0f 93       	push	r16
+ 3e6:	1f 93       	push	r17
+ 3e8:	cf 93       	push	r28
+ 3ea:	df 93       	push	r29
+	uint8_t lenght = strlen(line);
+ 3ec:	fc 01       	movw	r30, r24
+ 3ee:	01 90       	ld	r0, Z+
+ 3f0:	00 20       	and	r0, r0
+ 3f2:	e9 f7       	brne	.-6      	; 0x3ee <ser_writeln+0xa>
+ 3f4:	31 97       	sbiw	r30, 0x01	; 1
+ 3f6:	de 2f       	mov	r29, r30
+ 3f8:	d8 1b       	sub	r29, r24
+	for (uint8_t p=0; p < lenght ; p++)
+ 3fa:	51 f0       	breq	.+20     	; 0x410 <__LOCK_REGION_LENGTH__+0x10>
+ 3fc:	8c 01       	movw	r16, r24
+ 3fe:	c0 e0       	ldi	r28, 0x00	; 0
+	{
+		char c = line[p];
+		ser_write(c);
+ 400:	f8 01       	movw	r30, r16
+ 402:	81 91       	ld	r24, Z+
+ 404:	8f 01       	movw	r16, r30
+ 406:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <ser_write>
+}
 
-000004b6 <eeprom_update_word>:
- 4b6:	01 96       	adiw	r24, 0x01	; 1
- 4b8:	27 2f       	mov	r18, r23
- 4ba:	0e 94 4a 02 	call	0x494	; 0x494 <eeprom_update_r18>
- 4be:	0c 94 49 02 	jmp	0x492	; 0x492 <eeprom_update_byte>
+void ser_writeln(char *line)
+{
+	uint8_t lenght = strlen(line);
+	for (uint8_t p=0; p < lenght ; p++)
+ 40a:	cf 5f       	subi	r28, 0xFF	; 255
+ 40c:	dc 13       	cpse	r29, r28
+ 40e:	f8 cf       	rjmp	.-16     	; 0x400 <__LOCK_REGION_LENGTH__>
+	{
+		char c = line[p];
+		ser_write(c);
+	}
+	ser_write(0x0A);
+ 410:	8a e0       	ldi	r24, 0x0A	; 10
+ 412:	0e 94 ea 01 	call	0x3d4	; 0x3d4 <ser_write>
+}
+ 416:	df 91       	pop	r29
+ 418:	cf 91       	pop	r28
+ 41a:	1f 91       	pop	r17
+ 41c:	0f 91       	pop	r16
+ 41e:	08 95       	ret
 
-000004c2 <_exit>:
- 4c2:	f8 94       	cli
+00000420 <ser_read>:
 
-000004c4 <__stop_program>:
- 4c4:	ff cf       	rjmp	.-2      	; 0x4c4 <__stop_program>
+// Serial read function in C
+
+char ser_read() {
+	loop_until_bit_is_set(UCSR0A, RXC0); /* Wait until data exists. */
+ 420:	e0 ec       	ldi	r30, 0xC0	; 192
+ 422:	f0 e0       	ldi	r31, 0x00	; 0
+ 424:	80 81       	ld	r24, Z
+ 426:	88 23       	and	r24, r24
+ 428:	ec f7       	brge	.-6      	; 0x424 <ser_read+0x4>
+	return UDR0;
+ 42a:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
+}
+ 42e:	08 95       	ret
+
+00000430 <ser_readln>:
+
+// Serial read line function in C (from computer to Arduino)
+
+void ser_readln(char *line, uint8_t bufsize) {
+ 430:	ef 92       	push	r14
+ 432:	ff 92       	push	r15
+ 434:	0f 93       	push	r16
+ 436:	1f 93       	push	r17
+ 438:	cf 93       	push	r28
+ 43a:	8c 01       	movw	r16, r24
+	uint8_t p=0;
+ 43c:	c0 e0       	ldi	r28, 0x00	; 0
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+		}
+		line[p]='\0';
+	} while ((c!='\n') && (p<bufsize-1));
+ 43e:	e6 2e       	mov	r14, r22
+ 440:	f1 2c       	mov	r15, r1
+ 442:	81 e0       	ldi	r24, 0x01	; 1
+ 444:	e8 1a       	sub	r14, r24
+ 446:	f1 08       	sbc	r15, r1
+ 448:	01 c0       	rjmp	.+2      	; 0x44c <ser_readln+0x1c>
+	uint8_t p=0;
+	char c;
+	do {
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+ 44a:	c2 2f       	mov	r28, r18
+
+void ser_readln(char *line, uint8_t bufsize) {
+	uint8_t p=0;
+	char c;
+	do {
+		c=ser_read();
+ 44c:	0e 94 10 02 	call	0x420	; 0x420 <ser_read>
+		if (c!='\n') {
+ 450:	8a 30       	cpi	r24, 0x0A	; 10
+ 452:	81 f0       	breq	.+32     	; 0x474 <ser_readln+0x44>
+			line[p++]=c;
+ 454:	21 e0       	ldi	r18, 0x01	; 1
+ 456:	2c 0f       	add	r18, r28
+ 458:	f8 01       	movw	r30, r16
+ 45a:	ec 0f       	add	r30, r28
+ 45c:	f1 1d       	adc	r31, r1
+ 45e:	80 83       	st	Z, r24
+		}
+		line[p]='\0';
+ 460:	82 2f       	mov	r24, r18
+ 462:	90 e0       	ldi	r25, 0x00	; 0
+ 464:	f8 01       	movw	r30, r16
+ 466:	e8 0f       	add	r30, r24
+ 468:	f9 1f       	adc	r31, r25
+ 46a:	10 82       	st	Z, r1
+	} while ((c!='\n') && (p<bufsize-1));
+ 46c:	8e 15       	cp	r24, r14
+ 46e:	9f 05       	cpc	r25, r15
+ 470:	64 f3       	brlt	.-40     	; 0x44a <ser_readln+0x1a>
+ 472:	04 c0       	rjmp	.+8      	; 0x47c <ser_readln+0x4c>
+	do {
+		c=ser_read();
+		if (c!='\n') {
+			line[p++]=c;
+		}
+		line[p]='\0';
+ 474:	f8 01       	movw	r30, r16
+ 476:	ec 0f       	add	r30, r28
+ 478:	f1 1d       	adc	r31, r1
+ 47a:	10 82       	st	Z, r1
+	} while ((c!='\n') && (p<bufsize-1));
+ 47c:	cf 91       	pop	r28
+ 47e:	1f 91       	pop	r17
+ 480:	0f 91       	pop	r16
+ 482:	ff 90       	pop	r15
+ 484:	ef 90       	pop	r14
+ 486:	08 95       	ret
+
+00000488 <strcmp>:
+ 488:	fb 01       	movw	r30, r22
+ 48a:	dc 01       	movw	r26, r24
+ 48c:	8d 91       	ld	r24, X+
+ 48e:	01 90       	ld	r0, Z+
+ 490:	80 19       	sub	r24, r0
+ 492:	01 10       	cpse	r0, r1
+ 494:	d9 f3       	breq	.-10     	; 0x48c <strcmp+0x4>
+ 496:	99 0b       	sbc	r25, r25
+ 498:	08 95       	ret
+
+0000049a <eeprom_update_byte>:
+ 49a:	26 2f       	mov	r18, r22
+
+0000049c <eeprom_update_r18>:
+ 49c:	f9 99       	sbic	0x1f, 1	; 31
+ 49e:	fe cf       	rjmp	.-4      	; 0x49c <eeprom_update_r18>
+ 4a0:	92 bd       	out	0x22, r25	; 34
+ 4a2:	81 bd       	out	0x21, r24	; 33
+ 4a4:	f8 9a       	sbi	0x1f, 0	; 31
+ 4a6:	01 97       	sbiw	r24, 0x01	; 1
+ 4a8:	00 b4       	in	r0, 0x20	; 32
+ 4aa:	02 16       	cp	r0, r18
+ 4ac:	39 f0       	breq	.+14     	; 0x4bc <eeprom_update_r18+0x20>
+ 4ae:	1f ba       	out	0x1f, r1	; 31
+ 4b0:	20 bd       	out	0x20, r18	; 32
+ 4b2:	0f b6       	in	r0, 0x3f	; 63
+ 4b4:	f8 94       	cli
+ 4b6:	fa 9a       	sbi	0x1f, 2	; 31
+ 4b8:	f9 9a       	sbi	0x1f, 1	; 31
+ 4ba:	0f be       	out	0x3f, r0	; 63
+ 4bc:	08 95       	ret
+
+000004be <eeprom_update_word>:
+ 4be:	01 96       	adiw	r24, 0x01	; 1
+ 4c0:	27 2f       	mov	r18, r23
+ 4c2:	0e 94 4e 02 	call	0x49c	; 0x49c <eeprom_update_r18>
+ 4c6:	0c 94 4d 02 	jmp	0x49a	; 0x49a <eeprom_update_byte>
+
+000004ca <_exit>:
+ 4ca:	f8 94       	cli
+
+000004cc <__stop_program>:
+ 4cc:	ff cf       	rjmp	.-2      	; 0x4cc <__stop_program>
