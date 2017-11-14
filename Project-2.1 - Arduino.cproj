@@ -133,6 +133,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="eeprom_functions.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ledControl.c">
       <SubType>compile</SubType>
     </Compile>
